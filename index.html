@@ -412,6 +412,124 @@
             transform: translateX(5px);
         }
 
+        /* Academic Projects Section */
+        .academic-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .academic-course {
+            margin-bottom: 4rem;
+        }
+
+        .course-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-glow);
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.3s;
+        }
+
+        .course-title:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: var(--primary-purple);
+            transform: translateY(-2px);
+        }
+
+        .academic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .academic-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .academic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .academic-card:hover::before {
+            left: 100%;
+        }
+
+        .academic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4);
+            border-color: var(--primary-purple);
+        }
+
+        .academic-image {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .academic-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .academic-card:hover .academic-image img {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+
+        .academic-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .academic-card:hover .academic-shine {
+            left: 100%;
+            opacity: 1;
+        }
+
+        .academic-info {
+            padding: 1.5rem;
+        }
+
+        .academic-info h4 {
+            color: var(--primary-purple);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .academic-info p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -653,8 +771,13 @@
             .projects-grid,
             .skills-container,
             .gallery-grid,
-            .workstation-grid {
+            .workstation-grid,
+            .academic-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .academic-image {
+                height: 250px;
             }
 
             .gallery-item img {
@@ -686,6 +809,7 @@
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#workstation">Workstation</a></li>
+                <li><a href="#academic">Academic</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -759,6 +883,11 @@
                 <a href="https://hrithik220.github.io/my-doraemon-game/" target="_blank" class="project-link">View Live Project →</a>
             </div>
             <div class="project-card fade-in">
+                <h3>🦸 Avengers Health Monitor</h3>
+                <p>A superhero-themed health monitoring application featuring interactive health tracking and Avengers characters. Built with engaging UI and real-time updates.</p>
+                <a href="https://hrithik220.github.io/avengers-health-monitor" target="_blank" class="project-link">View Live Project →</a>
+            </div>
+            <div class="project-card fade-in">
                 <h3>🎨 Personal Portfolio</h3>
                 <p>This responsive portfolio website showcasing my projects and skills with a futuristic purple theme and smooth animations.</p>
                 <a href="https://hrithik220.github.io/hrithik-portfolio/" target="_blank" class="project-link">View Live Project →</a>
@@ -792,6 +921,74 @@
                         <img src="https://i.imgur.com/DmYdr8I.jpg" alt="Workstation Setup 3">
                         <div class="workstation-overlay">
                             <span>🎮 Complete Setup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="academic">
+        <h2 class="section-title">Academic Projects</h2>
+        <div class="academic-content fade-in">
+            <p style="color: var(--text-gray); text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">Hands-on learning through innovative academic projects at BRAC University</p>
+            
+            <!-- CSE461: Introduction to Robotics -->
+            <div class="academic-course">
+                <h3 class="course-title">CSE461: Introduction to Robotics</h3>
+                <div class="academic-grid">
+                    <div class="academic-card fade-in">
+                        <div class="academic-image">
+                            <img src="https://i.imgur.com/sSvndXN.jpg" alt="Robotics Project 1">
+                            <div class="academic-shine"></div>
+                        </div>
+                        <div class="academic-info">
+                            <h4>🤖 Robotics Project - Part 1</h4>
+                            <p>Exploring fundamental robotics concepts including sensor integration, motor control, and autonomous navigation systems.</p>
+                        </div>
+                    </div>
+                    <div class="academic-card fade-in">
+                        <div class="academic-image">
+                            <img src="https://i.imgur.com/KKUAmcn.jpg" alt="Robotics Project 2">
+                            <div class="academic-shine"></div>
+                        </div>
+                        <div class="academic-info">
+                            <h4>🤖 Robotics Project - Part 2</h4>
+                            <p>Advanced implementation featuring obstacle avoidance, path planning algorithms, and real-time control mechanisms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSE350: Digital Electronics and Pulse Techniques -->
+            <div class="academic-course">
+                <h3 class="course-title">CSE350: Digital Electronics and Pulse Techniques</h3>
+                <div class="academic-grid">
+                    <div class="academic-card fade-in">
+                        <div class="academic-image">
+                            <img src="https://i.imgur.com/placeholder1.jpg" alt="Digital Electronics Project">
+                            <div class="academic-shine"></div>
+                        </div>
+                        <div class="academic-info">
+                            <h4>⚡ Digital Circuit Design</h4>
+                            <p>Designed and implemented complex digital circuits using logic gates, flip-flops, and pulse generation techniques for various applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSE260: Digital Logic Design -->
+            <div class="academic-course">
+                <h3 class="course-title">CSE260: Digital Logic Design</h3>
+                <div class="academic-grid">
+                    <div class="academic-card fade-in">
+                        <div class="academic-image">
+                            <img src="https://i.imgur.com/placeholder2.jpg" alt="Logic Design Project">
+                            <div class="academic-shine"></div>
+                        </div>
+                        <div class="academic-info">
+                            <h4>🔧 Logic Circuit Implementation</h4>
+                            <p>Built fundamental logic circuits including multiplexers, decoders, and sequential circuits using Boolean algebra and Karnaugh maps.</p>
                         </div>
                     </div>
                 </div>
