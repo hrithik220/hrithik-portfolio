@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hrithik | CSE Student & Programmer</title>
+    <title>Hrithik | Software Engineer </title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -370,6 +370,229 @@
         font-size: 0.9rem;
         margin-top: 1rem;
         border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+        /* Academic Skills Section */
+#academic-skills {
+    background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#academic-skills::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(96, 165, 250, 0.1) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.academic-skills-intro {
+    text-align: center;
+    color: #93c5fd;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.academic-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.academic-skill-card {
+    background: linear-gradient(135deg, #1e3a5f, #0f2847);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.academic-skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.academic-skill-card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(96, 165, 250, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.academic-skill-card:hover::before {
+    opacity: 1;
+}
+
+.academic-skill-card:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.academic-skill-card:hover {
+    transform: translateY(-12px) rotateX(5deg);
+    box-shadow: 0 25px 60px rgba(59, 130, 246, 0.6);
+    border-color: #3b82f6;
+}
+
+.skill-icon-wrapper {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1rem;
+}
+
+.academic-skill-icon {
+    font-size: 3rem;
+    display: inline-block;
+    animation: float-icon 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px #3b82f6);
+}
+
+@keyframes float-icon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.academic-skill-card:hover .academic-skill-icon {
+    animation: rotate-icon 0.6s ease-in-out;
+}
+
+@keyframes rotate-icon {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.academic-skill-name {
+    color: #60a5fa;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+.academic-skill-card:hover .academic-skill-name {
+    color: #93c5fd;
+    transform: translateX(5px);
+}
+
+.academic-skill-category {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    color: #3b82f6;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+.academic-skill-card:hover .academic-skill-category {
+    background: rgba(59, 130, 246, 0.4);
+    border-color: #3b82f6;
+}
+
+.skill-level-bar {
+    position: relative;
+    background: rgba(59, 130, 246, 0.2);
+    height: 8px;
+    border-radius: 10px;
+    margin-top: 1rem;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.skill-level-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 10px;
+    position: relative;
+    animation: fillSkill 2s ease-out forwards;
+    transform-origin: left;
+}
+
+.skill-level-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes fillSkill {
+    from { width: 0; }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.floating-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle-blue {
+    position: absolute;
+    background: #3b82f6;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float-particle 8s infinite ease-in-out;
+}
+
+@keyframes float-particle {
+    0%, 100% { 
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: translateY(-30px) translateX(20px) scale(1.5);
+        opacity: 0.6;
+    }
 }
         /* Photo Gallery Section */
         .gallery-grid {
@@ -893,6 +1116,8 @@
                 <li><a href="#academic">Academic</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#academic-skills">Academic Skills</a></li>
             </ul>
         </div>
     </nav>
@@ -1008,7 +1233,219 @@
             </div>
         </div>
     </section>
+
+ <section id="academic-skills">
+    <div class="floating-particles">
+        <div class="particle-blue" style="width: 8px; height: 8px; left: 10%; top: 20%; animation-delay: 0s;"></div>
+        <div class="particle-blue" style="width: 6px; height: 6px; left: 80%; top: 30%; animation-delay: 2s;"></div>
+        <div class="particle-blue" style="width: 10px; height: 10px; left: 50%; top: 60%; animation-delay: 4s;"></div>
+        <div class="particle-blue" style="width: 7px; height: 7px; left: 20%; top: 80%; animation-delay: 1s;"></div>
+        <div class="particle-blue" style="width: 9px; height: 9px; left: 90%; top: 70%; animation-delay: 3s;"></div>
+    </div>
     
+    <h2 class="section-title" style="color: #60a5fa; position: relative; z-index: 1;">Academic Skills</h2>
+    <p class="academic-skills-intro">Core subjects and technical competencies developed through rigorous academic coursework</p>
+    
+    <div class="academic-skills-grid">
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🐍</div>
+            </div>
+            <div class="academic-skill-name">Python Programming</div>
+            <span class="academic-skill-category">Programming</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 85%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">📐</div>
+            </div>
+            <div class="academic-skill-name">Calculus & Coordinate Geometry</div>
+            <span class="academic-skill-category">Mathematics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 80%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">📊</div>
+            </div>
+            <div class="academic-skill-name">Statistics & Probability</div>
+            <span class="academic-skill-category">Mathematics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 75%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🔢</div>
+            </div>
+            <div class="academic-skill-name">Discrete Mathematics</div>
+            <span class="academic-skill-category">Mathematics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 78%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">📡</div>
+            </div>
+            <div class="academic-skill-name">Data Communications</div>
+            <span class="academic-skill-category">Networking</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 70%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🔷</div>
+            </div>
+            <div class="academic-skill-name">Linear Algebra & Fourier Analysis</div>
+            <span class="academic-skill-category">Mathematics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 82%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">⚡</div>
+            </div>
+            <div class="academic-skill-name">Circuits & Electronics</div>
+            <span class="academic-skill-category">Electronics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 76%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🧮</div>
+            </div>
+            <div class="academic-skill-name">Numerical Methods</div>
+            <span class="academic-skill-category">Mathematics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 74%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🌲</div>
+            </div>
+            <div class="academic-skill-name">Data Structures & Algorithms</div>
+            <span class="academic-skill-category">Computer Science</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 88%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">💾</div>
+            </div>
+            <div class="academic-skill-name">Digital Logic Design</div>
+            <span class="academic-skill-category">Electronics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 79%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">📈</div>
+            </div>
+            <div class="academic-skill-name">Laplace Transformations</div>
+            <span class="academic-skill-category">Mathematics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 72%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🖥️</div>
+            </div>
+            <div class="academic-skill-name">Computer Architecture</div>
+            <span class="academic-skill-category">Computer Science</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 81%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🔌</div>
+            </div>
+            <div class="academic-skill-name">Digital Electronics & Pulse Techniques</div>
+            <span class="academic-skill-category">Electronics</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 77%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🤖</div>
+            </div>
+            <div class="academic-skill-name">Robotics</div>
+            <span class="academic-skill-category">Engineering</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 83%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🎨</div>
+            </div>
+            <div class="academic-skill-name">Computer Graphics</div>
+            <span class="academic-skill-category">Computer Science</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 75%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🔄</div>
+            </div>
+            <div class="academic-skill-name">Automata & Computability</div>
+            <span class="academic-skill-category">Theory</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 80%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🗄️</div>
+            </div>
+            <div class="academic-skill-name">Database Systems</div>
+            <span class="academic-skill-category">Computer Science</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 84%;"></div>
+            </div>
+        </div>
+
+        <div class="academic-skill-card fade-in">
+            <div class="skill-icon-wrapper">
+                <div class="academic-skill-icon">🧠</div>
+            </div>
+            <div class="academic-skill-name">Artificial Intelligence</div>
+            <span class="academic-skill-category">Computer Science</span>
+            <div class="skill-level-bar">
+                <div class="skill-level-fill" style="width: 86%;"></div>
+            </div>
+        </div>
+    </div>
+</section>
         <section id="education">
     <h2 class="section-title" style="color: #ff8c00;">Educational Background</h2>
     <div class="education-grid">
