@@ -291,7 +291,86 @@
             margin-bottom: 1rem;
             line-height: 1.8;
         }
+        /* Education Section */
+        #education {
+            background: linear-gradient(135deg, #1a0a00 0%, #2d1500 100%);
+            position: relative;
+        }
 
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, #2d1500, #1a0a00);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+       .education-card::before {
+           content: '';
+           position: absolute;
+           top: -50%;
+           left: -50%;
+           width: 200%;
+           height: 200%;
+           background: linear-gradient(45deg, transparent, rgba(255, 140, 0, 0.1), transparent);
+           transform: rotate(45deg);
+           transition: all 0.6s;
+       }
+
+       .education-card:hover::before {
+           left: 100%;
+       }
+
+       .education-card:hover {
+           transform: translateY(-10px);
+           box-shadow: 0 20px 50px rgba(255, 140, 0, 0.4);
+           border-color: #ff8c00;
+       }
+
+       .education-icon {
+           font-size: 3rem;
+           margin-bottom: 1rem;
+           filter: drop-shadow(0 0 15px #ff8c00);
+       }
+
+      .education-card h3 {
+          color: #ff8c00;
+          font-size: 1.6rem;
+          margin-bottom: 0.5rem;
+          font-weight: 700;
+      }
+
+     .education-degree {
+         color: #ffa500;
+         font-size: 1.1rem;
+         margin-bottom: 1rem;
+         font-weight: 600;
+     }
+
+    .education-card p {
+        color: #d1d5db;
+        line-height: 1.8;
+    }
+
+    .education-year {
+        display: inline-block;
+        background: rgba(255, 140, 0, 0.2);
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        color: #ff8c00;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+        border: 1px solid rgba(255, 140, 0, 0.3);
+}
         /* Photo Gallery Section */
         .gallery-grid {
             display: grid;
@@ -929,7 +1008,34 @@
             </div>
         </div>
     </section>
+    
+        <section id="education">
+    <h2 class="section-title" style="color: #ff8c00;">Educational Background</h2>
+    <div class="education-grid">
 
+        <div class="education-card fade-in">
+            <div class="education-icon">🎓</div>
+            <h3>BRAC University</h3>
+            <div class="education-degree">Undergraduate</div>
+            <p>Computer Science and Engineering</p>
+            <span class="education-year">Current</span>
+        </div>
+        <div class="education-card fade-in">
+            <div class="education-icon">🏫</div>
+            <h3>Dhaka Imperial College</h3>
+            <div class="education-degree">Higher Secondary</div>
+            <p>Science</p>
+            <span class="education-year">Completed</span>
+        </div>
+        <div class="education-card fade-in">
+            <div class="education-icon">📚</div>
+            <h3>National Ideal School</h3>
+            <div class="education-degree">Secondary School</div>
+            <p>Foundation in Science and Mathematics</p>
+            <span class="education-year">Completed</span>
+        </div>
+    </div>
+</section>
     <section id="academic">
         <h2 class="section-title">Academic Projects</h2>
         <div class="academic-content fade-in">
