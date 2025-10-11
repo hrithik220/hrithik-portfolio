@@ -1488,9 +1488,60 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* ENTRANCE ANIMATION STYLES */
+.entrance{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(45deg,#0a0e27 0%,#1a0033 50%,#0f0620 100%);z-index:9999;display:flex;align-items:center;justify-content:center;animation:fade 0.6s ease 4.8s forwards}
+@keyframes fade{to{opacity:0;pointer-events:none}}
+.container{position:relative;text-align:center;z-index:10}
+.bg{position:absolute;width:100%;height:100%;top:0;left:0;background:radial-gradient(ellipse at 50% 50%,rgba(168,85,247,0.1) 0%,transparent 60%);animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:0.7}}
+.stream{position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.3),transparent);filter:blur(30px)}
+.stream1{top:25%;animation:flow1 4s ease-in-out infinite}
+.stream2{top:50%;animation:flow2 5s ease-in-out infinite}
+.stream3{top:75%;animation:flow3 4.5s ease-in-out infinite}
+@keyframes flow1{0%{transform:translateX(-100%);opacity:0}25%{opacity:1}75%{opacity:1}100%{transform:translateX(100%);opacity:0}}
+@keyframes flow2{0%{transform:translateX(100%);opacity:0}25%{opacity:1}75%{opacity:1}100%{transform:translateX(-100%);opacity:0}}
+@keyframes flow3{0%{transform:translateX(-100%);opacity:0}25%{opacity:1}75%{opacity:1}100%{transform:translateX(100%);opacity:0}}
+.orb{position:absolute;border-radius:50%;filter:blur(40px)}
+.orb1{width:300px;height:300px;background:radial-gradient(circle,rgba(168,85,247,0.4),transparent);top:10%;left:5%;animation:float1 8s ease-in-out infinite}
+.orb2{width:250px;height:250px;background:radial-gradient(circle,rgba(139,92,246,0.3),transparent);bottom:10%;right:8%;animation:float1 10s ease-in-out infinite reverse}
+@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-40px)}}
+.ring{position:absolute;border:1px solid rgba(168,85,247,0.3);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);animation:expand 2.5s ease-out infinite}
+.ring1{width:80px;height:80px}
+.ring2{width:80px;height:80px;animation-delay:0.8s}
+.ring3{width:80px;height:80px;animation-delay:1.6s}
+@keyframes expand{0%{width:80px;height:80px;opacity:1}100%{width:120px;height:120px;opacity:0}}
+.title{font-size:4.5rem;font-weight:300;letter-spacing:2px;color:#fff;opacity:0;animation:slide 1s ease 0.8s forwards}
+.accent{background:linear-gradient(135deg,#a855f7,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{font-size:1.1rem;letter-spacing:3px;color:#9ca3af;opacity:0;animation:fade 1s ease 1.5s forwards;margin-top:1.5rem;font-weight:300}
+.line{width:60px;height:2px;background:linear-gradient(90deg,transparent,#a855f7,transparent);margin:1.5rem auto;opacity:0;animation:draw 0.8s ease 2s forwards}
+@keyframes slide{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes draw{from{width:0;opacity:0}to{width:60px;opacity:1}}
+.dot{position:absolute;width:2px;height:2px;background:#a855f7;border-radius:50%;opacity:0.4}
+.progress{position:absolute;bottom:80px;width:120px;height:1px;background:rgba(168,85,247,0.2);opacity:0;animation:fade 0.6s ease 3s forwards}
+.bar{height:100%;background:linear-gradient(90deg,#a855f7,#c084fc);animation:fill 2.5s ease 3.5s forwards;box-shadow:0 0 8px rgba(168,85,247,0.6)}
+@keyframes fill{0%{width:0}100%{width:100%}}
     </style>
 </head>
 <body>
+     <!-- ENTRANCE ANIMATION -->
+    <div class="entrance" id="entrance">
+        <div class="bg"></div>
+        <div class="stream stream1"></div>
+        <div class="stream stream2"></div>
+        <div class="stream stream3"></div>
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="ring ring1"></div>
+        <div class="ring ring2"></div>
+        <div class="ring ring3"></div>
+        <div class="container">
+            <h1 class="title"><span class="accent">HRITHIK</span></h1>
+            <p class="sub">SOFTWARE ENGINEER</p>
+            <div class="line"></div>
+        </div>
+        <div class="progress"><div class="bar"></div></div>
+    </div>
+    <!-- END ENTRANCE ANIMATION -->
     <div class="bg-animation"></div>
 
    <nav>
@@ -2126,6 +2177,17 @@ document.querySelectorAll('.nav-links a, .cta-button').forEach(anchor => {
                 navLinks.classList.remove('active');
             }
         });
+        // ENTRANCE ANIMATION
+for(let i=0;i<20;i++){
+const d=document.createElement('div');
+d.className='dot';
+d.style.left=Math.random()*100+'%';
+d.style.top=Math.random()*100+'%';
+d.style.opacity=Math.random()*0.6+0.2;
+document.querySelector('.entrance').appendChild(d);
+}
+setTimeout(()=>{document.getElementById('entrance').style.display='none'},4900);
+if(!sessionStorage.getItem('shown')){sessionStorage.setItem('shown','1')}else{document.getElementById('entrance').style.display='none'}
     </script>
 </body>
 </html>
