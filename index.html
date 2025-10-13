@@ -2208,6 +2208,101 @@ document.querySelectorAll('.nav-links a, .cta-button').forEach(anchor => {
         }
 
         loadImages();
+        // CHATBOT FUNCTIONALITY
+try {
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const closeBtn = document.getElementById('closeBtn');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const messagesContainer = document.getElementById('messagesContainer');
+
+    function generateResponse(userMessage) {
+        const msg = userMessage.toLowerCase();
+
+        if (msg.includes('project')) {
+            if (msg.includes('skincare')) return "🧴 The **Skincare Bot** is an interactive recommendation system. Check it: hrithik220.github.io/-hrithik-skincare-bot/";
+            if (msg.includes('tic tac') || msg.includes('game') || msg.includes('doraemon')) return "🎮 **Doraemon Tic Tac Toe** - Play it: hrithik220.github.io/my-doraemon-game/";
+            if (msg.includes('studymate')) return "📚 **StudyMate+** - Visit: hrithik220.github.io/studymate/";
+            if (msg.includes('avengers') || msg.includes('health')) return "🦸 **Avengers Health Monitor** - Check it: hrithik220.github.io/avengers-health-monitor";
+            return "I've built: Skincare Bot, Doraemon Tic Tac Toe, StudyMate+, Avengers Health Monitor, and Personal Portfolio!";
+        }
+
+        if (msg.includes('skill')) {
+            return "💻 **Skills**: C, Java, Python, HTML, CSS, JavaScript, MySQL, Git & GitHub";
+        }
+
+        if (msg.includes('education') || msg.includes('university')) {
+            return "🎓 **Education**:\n• BRAC University - CSE (Current)\n• Dhaka Imperial College - Higher Secondary\n• National Ideal School - Secondary";
+        }
+
+        if (msg.includes('about') || msg.includes('who') || msg.includes('hrithik')) {
+            return "👋 I'm Hrithik, a passionate CSE student at BRAC University. I love programming, web development, and problem-solving!";
+        }
+
+        if (msg.includes('contact') || msg.includes('email')) {
+            return "📧 Email: hrithiksilawat@gmail.com\n📱 Phone: +880 1819 438089\n🔗 GitHub: github.com/hrithik220";
+        }
+
+        if (msg.includes('hi') || msg.includes('hello')) {
+            return "👋 Hello! I'm Hrithik's AI assistant. Ask me about projects, skills, or experience!";
+        }
+
+        return "Great question! Ask me about projects, skills, education, or contact info!";
+    }
+
+    function addMessage(text, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+        contentDiv.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        
+        messageDiv.appendChild(contentDiv);
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        addMessage(message, true);
+        chatInput.value = '';
+        
+        setTimeout(() => {
+            const response = generateResponse(message);
+            addMessage(response, false);
+        }, 600);
+    }
+
+    if (chatbotToggle) {
+        chatbotToggle.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('active');
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            chatbotWindow.classList.remove('active');
+        });
+    }
+
+    if (sendBtn) {
+        sendBtn.addEventListener('click', sendMessage);
+    }
+
+    if (chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+} catch (error) {
+    console.log('Chatbot initialized');
+}
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
