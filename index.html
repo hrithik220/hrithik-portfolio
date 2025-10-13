@@ -2109,7 +2109,45 @@
     <footer>
         <p>&copy; 2025 Hrithik. All rights reserved.</p>
     </footer>
+    <!-- CHATBOT WIDGET -->
+<div class="chatbot-widget">
+    <button class="chatbot-toggle" id="chatbotToggle" title="Chat with Hrithik's Bot">
+        <span class="robot-icon">🤖</span>
+    </button>
 
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-header-content">
+                <span class="header-robot">🤖</span>
+                <div class="header-text">
+                    <h3>Hrithik Bot</h3>
+                    <p>Ask me anything!</p>
+                </div>
+            </div>
+            <button class="close-btn" id="closeBtn">✕</button>
+        </div>
+
+        <div class="chatbot-messages" id="messagesContainer">
+            <div class="message bot">
+                <div class="message-content">
+                    👋 Hi! I'm Hrithik's AI assistant. Ask me anything about his projects, skills, education, or portfolio!
+                </div>
+            </div>
+        </div>
+
+        <div class="chatbot-input-area">
+            <input 
+                type="text" 
+                class="chatbot-input" 
+                id="chatInput" 
+                placeholder="Ask me something..."
+                autocomplete="off"
+            >
+            <button class="send-btn" id="sendBtn">📤</button>
+        </div>
+    </div>
+</div>
+<!-- END CHATBOT -->
     <script>
         const observerOptions = {
             threshold: 0.1,
@@ -2218,6 +2256,100 @@ const countInterval = setInterval(() => {
         clearInterval(countInterval);
     }
 }, 1000);
+        // CHATBOT FUNCTIONALITY
+const chatbotToggle = document.getElementById('chatbotToggle');
+const chatbotWindow = document.getElementById('chatbotWindow');
+const closeBtn = document.getElementById('closeBtn');
+const chatInput = document.getElementById('chatInput');
+const sendBtn = document.getElementById('sendBtn');
+const messagesContainer = document.getElementById('messagesContainer');
+
+const portfolioData = {
+    projects: {
+        "skincare bot": "A skincare recommendation bot built with modern web technologies. It helps users find perfect skincare routines with an intuitive UI.",
+        "tic tac toe": "A Doraemon-themed Tic Tac Toe game with engaging animations and smooth gameplay. Features player vs player mode.",
+        "studymate": "Smart study companion with AI-powered flashcard generator, interactive quiz maker, and focus timer. Black & yellow futuristic theme.",
+        "avengers health monitor": "Superhero-themed health monitoring app with interactive tracking and Avengers characters.",
+        "portfolio": "My responsive portfolio website with futuristic purple theme and smooth animations."
+    }
+};
+
+function generateResponse(userMessage) {
+    const msg = userMessage.toLowerCase();
+
+    if (msg.includes('project')) {
+        if (msg.includes('skincare')) return "🧴 The **Skincare Bot** is an interactive recommendation system that helps users find perfect skincare routines. Check it out: hrithik220.github.io/-hrithik-skincare-bot/";
+        if (msg.includes('tic tac') || msg.includes('game') || msg.includes('doraemon')) return "🎮 **Doraemon Tic Tac Toe** - A fun game with Doraemon theme, player vs player mode, and engaging animations. Play it: hrithik220.github.io/my-doraemon-game/";
+        if (msg.includes('studymate')) return "📚 **StudyMate+** is a smart study companion with AI flashcard generator, quiz maker, and focus timer. Features a futuristic black & yellow theme! Visit: hrithik220.github.io/studymate/";
+        if (msg.includes('avengers') || msg.includes('health')) return "🦸 **Avengers Health Monitor** - A superhero-themed health app with interactive tracking and Avengers characters. Check it: hrithik220.github.io/avengers-health-monitor";
+        return "I've built several projects: Skincare Bot, Doraemon Tic Tac Toe, StudyMate+, Avengers Health Monitor, and my Personal Portfolio. Ask about any of them!";
+    }
+
+    if (msg.includes('skill')) {
+        if (msg.includes('programming') || msg.includes('language')) return "💻 **Programming Languages**: C, Java, Python\n🌐 **Web Technologies**: HTML, CSS, JavaScript\n🗄️ **Database**: MySQL\n🔧 **Tools**: Git & GitHub";
+        return "I'm skilled in C, Java, Python, web technologies, MySQL, Git, and have strong problem-solving abilities!";
+    }
+
+    if (msg.includes('education') || msg.includes('university') || msg.includes('study')) {
+        return "🎓 **Education Background**:\n• **BRAC University** - Computer Science & Engineering (Current)\n• **Dhaka Imperial College** - Higher Secondary\n• **National Ideal School** - Secondary School";
+    }
+
+    if (msg.includes('about') || msg.includes('who') || msg.includes('hrithik')) {
+        return "👋 I'm Hrithik, a passionate CSE student at BRAC University with interests in programming, web development, and problem-solving. I love turning ideas into reality through code!";
+    }
+
+    if (msg.includes('contact') || msg.includes('email') || msg.includes('phone')) {
+        return "📞 **Get in Touch**:\n📧 Email: hrithiksilawat@gmail.com\n📱 Phone: +880 1819 438089\n🔗 GitHub: github.com/hrithik220";
+    }
+
+    if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) {
+        return "👋 Hello! I'm Hrithik's AI assistant. What would you like to know about his projects, skills, or experience?";
+    }
+
+    return "Great question! I can help you with info about projects, skills, education, contact details, and more. What specific aspect interests you?";
+}
+
+function addMessage(text, isUser) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    contentDiv.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    messageDiv.appendChild(contentDiv);
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    addMessage(message, true);
+    chatInput.value = '';
+    
+    setTimeout(() => {
+        const response = generateResponse(message);
+        addMessage(response, false);
+    }, 600);
+}
+
+chatbotToggle.addEventListener('click', () => {
+    chatbotWindow.classList.toggle('active');
+});
+
+closeBtn.addEventListener('click', () => {
+    chatbotWindow.classList.remove('active');
+});
+
+sendBtn.addEventListener('click', sendMessage);
+
+chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
     </script>
     <!DOCTYPE html>
 <html lang="en">
