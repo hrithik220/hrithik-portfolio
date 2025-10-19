@@ -1089,11 +1089,11 @@
         }
 
         .academic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 2rem;
-        }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+}
 
         .academic-card {
             background: var(--card-bg);
@@ -1126,11 +1126,18 @@
         }
 
         .academic-image {
-            position: relative;
-            overflow: hidden;
-            height: 300px;
-        }
+    position: relative;
+    overflow: hidden;
+    height: auto;
+}
 
+.academic-image img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    transition: all 0.5s ease;
+}
         .academic-image img {
             width: 100%;
             height: 100%;
