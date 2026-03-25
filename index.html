@@ -1543,6 +1543,10 @@
     50% { opacity: 1; transform: scale(1.2); }
     100% { opacity: 0; transform: scale(0.8); }
 }
+  @keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.5); transform: translateX(-50%) scale(1); }
+    50% { box-shadow: 0 0 25px rgba(34, 197, 94, 0.9); transform: translateX(-50%) scale(1.07); }
+}
     </style>
 </head>
 <body>
@@ -1662,6 +1666,30 @@
     <h3>📚 StudyMate+</h3>
     <p>Smart study companion with AI-powered flashcard generator, interactive quiz maker, and focus timer. Features a futuristic black & yellow theme for enhanced learning experience.</p>
     <a href="https://hrithik220.github.io/studymate/" target="_blank" rel="noopener noreferrer" class="project-link">View Live Project →</a>
+</div>
+        <div class="project-card fade-in" style="border-color: rgba(34, 197, 94, 0.3); position: relative;">
+    <!-- Most Popular Badge -->
+    <div style="
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: white;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        padding: 4px 14px;
+        border-radius: 20px;
+        white-space: nowrap;
+        z-index: 10;
+        text-transform: uppercase;
+        animation: badgePulse 2s ease-in-out infinite;
+    ">⭐ Most Popular</div>
+
+    <h3 style="color: #22c55e;">✍️ Text to Handwritten</h3>
+    <p>Convert any typed text into beautiful handwritten-style notes instantly. A unique tool that brings a personal touch to digital writing — great for students and creators.</p>
+    <a href="https://text-to-handwritten-hrithik.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link" style="color: #22c55e;">View Live Project →</a>
 </div>
         <div class="project-card fade-in">
             <h3>🦸 Avengers Health Monitor</h3>
