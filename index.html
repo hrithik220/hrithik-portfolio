@@ -124,11 +124,22 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 .h-link:hover{color:#ffffff}
 .h-link:hover::after{width:100%}
 .h-img-wrap{position:relative;display:flex;justify-content:center}
-.h-img-frame{position:relative;width:320px;height:400px;border:1px solid rgba(0,212,255,0.2);border-radius:8px;overflow:hidden}
+.h-img-frame{position:relative;width:320px;height:400px;border:1px solid rgba(0,212,255,0.2);border-radius:8px;overflow:hidden;transform-style:preserve-3d;perspective:800px;transition:box-shadow 0.3s ease}
 .h-img-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,8,16,0.6) 100%);z-index:1;pointer-events:none}
-.h-img-frame img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.7s var(--ease-out)}
-.h-img-frame:hover img{transform:scale(1.03)}
-.corner{position:absolute;width:16px;height:16px;border-color:var(--p2);border-style:solid;z-index:2;transition:all 0.3s}
+
+/* ── MOUSE TRACKING OVERLAY GRADIENT ── */
+.h-img-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,212,255,0.13) 0%,transparent 65%);z-index:2;pointer-events:none;border-radius:8px;opacity:0;transition:opacity 0.3s ease}
+.h-img-frame:hover::before,.h-img-frame.touch-active::before{opacity:1}
+.h-img-frame.tracking{box-shadow:0 0 30px rgba(0,212,255,0.25),0 0 60px rgba(0,212,255,0.1),inset 0 0 20px rgba(0,212,255,0.05)}
+
+/* ── GAZE WRAP ── */
+.h-img-gaze-wrap{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.08s linear;will-change:transform}
+
+/* ── GLOW DOT that follows mouse ── */
+.h-img-glow{position:absolute;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.38) 0%,transparent 70%);pointer-events:none;z-index:5;transform:translate(-50%,-50%);opacity:0;transition:opacity 0.3s ease;mix-blend-mode:screen}
+.h-img-frame:hover .h-img-glow,.h-img-frame.touch-active .h-img-glow{opacity:1}
+
+.corner{position:absolute;width:16px;height:16px;border-color:var(--p2);border-style:solid;z-index:6;transition:all 0.3s}
 .h-img-frame:hover .tl{top:-3px;left:-3px}
 .h-img-frame:hover .tr{top:-3px;right:-3px}
 .h-img-frame:hover .bl{bottom:-3px;left:-3px}
@@ -137,6 +148,10 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 .tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
 .bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
 .br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+
+.h-img-gaze-wrap img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.7s var(--ease-out);filter:brightness(0.95) contrast(1.04)}
+.h-img-frame:hover .h-img-gaze-wrap img{filter:brightness(1) contrast(1.06)}
+
 .h-badge{position:absolute;bottom:-14px;left:-18px;z-index:3;background:var(--card2);border:1px solid rgba(0,212,255,0.3);border-radius:6px;padding:0.8rem 1.1rem;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
 .h-badge .n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:var(--gold);line-height:1}
 .h-badge .l{font-family:var(--mono);font-size:0.55rem;color:var(--text-m);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
@@ -202,40 +217,19 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 
 .ctag{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.6rem;color:var(--gold2);letter-spacing:2px;text-transform:uppercase;padding:0.5rem 1.1rem;border-left:2px solid var(--gold);background:rgba(251,191,36,0.05);margin-bottom:1.5rem;border-radius:0 4px 4px 0}
 
-/* =============================================
-   HARDWARE PROJECT IMAGE FIX
-   - aspect-ratio 16/9 for responsive sizing
-   - object-fit: cover (like profile picture)
-   - no more cropping on laptop, no gap on mobile
-   ============================================= */
 .hwgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-bottom:2.5rem}
 .hwcard{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all 0.4s var(--ease-out);display:flex;flex-direction:column}
 .hwcard:hover{border-color:rgba(0,212,255,0.3);box-shadow:0 20px 48px rgba(0,0,0,0.5),0 0 30px rgba(14,165,233,0.06);transform:translateY(-4px)}
-.hw-img{
-  width:100%;
-  aspect-ratio:16/9;
-  overflow:hidden;
-  background:#0a0a18;
-  flex-shrink:0;
-  position:relative;
-}
+.hw-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0a18;flex-shrink:0;position:relative}
 .hw-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(8,8,16,0.35) 100%);pointer-events:none}
-.hw-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  display:block;
-  transition:transform 0.6s var(--ease-out);
-  filter:brightness(0.92) contrast(1.06) saturate(0.95);
-}
+.hw-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.6s var(--ease-out);filter:brightness(0.92) contrast(1.06) saturate(0.95)}
 .hwcard:hover .hw-img img{transform:scale(1.03);filter:brightness(1) contrast(1.06) saturate(1)}
 .hwinfo{padding:1.1rem 1.3rem}
 .hwinfo h4{font-family:var(--display);font-size:1.05rem;font-weight:800;color:#ffffff;margin-bottom:0.35rem}
 .hwinfo p{font-size:0.85rem;color:var(--text-m);line-height:1.65;font-weight:300}
 
 .cwrap{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
-.citem{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.4rem;border:1px solid var(--border);border-radius:6px;background:var(--card);text-decoration:none;transition:all 0.3s var(--ease-out);margin-bottom:0.8rem;group:true}
+.citem{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.4rem;border:1px solid var(--border);border-radius:6px;background:var(--card);text-decoration:none;transition:all 0.3s var(--ease-out);margin-bottom:0.8rem}
 .citem:hover{border-color:rgba(0,212,255,0.3);transform:translateX(6px);background:var(--card2);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
 .cico{color:var(--p2);flex-shrink:0;transition:color 0.2s}
 .cico svg{width:15px;height:15px;display:block}
@@ -254,7 +248,7 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 .arow{display:flex;align-items:center;gap:0.9rem;margin-bottom:1rem}
 .atxt{font-family:var(--body);font-size:0.9rem;color:#ffffff;font-weight:500}
 .adiv{height:1px;background:var(--border);margin:1.5rem 0}
-.asub{font-family:var(--mono);font-size:0.57px;color:var(--text-d);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;font-size:0.57rem}
+.asub{font-family:var(--mono);font-size:0.57rem;color:var(--text-d);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem}
 .aval{font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--gold)}
 
 .par-text{will-change:transform;transition:transform 0.05s linear}
@@ -276,7 +270,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;text-align:center;gap:3rem}
   .h-img-wrap{order:-1}
-  .h-img-frame{width:240px;height:300px}
+  .h-img-frame{width:240px;height:300px;perspective:600px}
   .h-badge{left:0;bottom:-14px}
   .h-bio{margin:0 auto 2rem}
   .h-links{justify-content:center}
@@ -363,10 +357,14 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
       </div>
     </div>
     <div class="h-img-wrap reveal">
-      <div class="h-img-frame">
+      <div class="h-img-frame" id="imgFrame">
         <div class="corner tl"></div><div class="corner tr"></div>
         <div class="corner bl"></div><div class="corner br"></div>
-        <img src="https://i.imgur.com/Ywo1SIi.jpg" alt="Hrithik">
+        <!-- GAZE WRAP — mouse tracking inner container -->
+        <div class="h-img-gaze-wrap" id="gazeWrap">
+          <div class="h-img-glow" id="gazeGlow"></div>
+          <img src="https://i.imgur.com/Ywo1SIi.jpg" alt="Hrithik">
+        </div>
       </div>
       <div class="h-badge"><div class="n">6+</div><div class="l">Live Projects</div></div>
     </div>
@@ -525,9 +523,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
           <span style="font-family:var(--mono);font-size:0.55rem;color:var(--acc);letter-spacing:2px;text-transform:uppercase;padding:0.2rem 0.6rem;border:1px solid rgba(0,212,255,0.25);border-radius:3px;background:rgba(0,212,255,0.05)">IoT · Embedded Systems</span>
         </div>
         <p style="margin-bottom:1.2rem">Smart automated poultry farm monitoring system — monitors temperature, humidity &amp; gas levels, automates feeding/watering, and prevents disease through real-time environmental control.</p>
-
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem">
-
           <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.12);border-radius:6px;padding:0.9rem 1rem">
             <div style="font-family:var(--mono);font-size:0.55rem;color:var(--acc);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--acc);display:inline-block"></span>Societal Impact</div>
             <ul style="list-style:none;display:flex;flex-direction:column;gap:0.35rem">
@@ -536,7 +532,6 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
               <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--acc)">›</span>Motivates youth to see farming as a viable career</li>
             </ul>
           </div>
-
           <div style="background:rgba(14,165,233,0.04);border:1px solid rgba(14,165,233,0.12);border-radius:6px;padding:0.9rem 1rem">
             <div style="font-family:var(--mono);font-size:0.55rem;color:var(--p2);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--p2);display:inline-block"></span>Health &amp; Safety</div>
             <ul style="list-style:none;display:flex;flex-direction:column;gap:0.35rem">
@@ -545,7 +540,6 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
               <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--p2)">›</span>Circuit fuses &amp; manual override ensure fail-safe ops</li>
             </ul>
           </div>
-
           <div style="background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.12);border-radius:6px;padding:0.9rem 1rem">
             <div style="font-family:var(--mono);font-size:0.55rem;color:var(--g2);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--g2);display:inline-block"></span>Legal &amp; Cultural</div>
             <ul style="list-style:none;display:flex;flex-direction:column;gap:0.35rem">
@@ -554,7 +548,6 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
               <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--g2)">›</span>Reduces workload for women managing home poultry</li>
             </ul>
           </div>
-
         </div>
       </div>
     </div>
@@ -608,6 +601,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
 <footer><p>© 2025 Hrithik </p></footer>
 
 <script>
+/* ── MATRIX BACKGROUND ── */
 (function(){
   const c=document.getElementById('mc');
   const x=c.getContext('2d');
@@ -629,40 +623,50 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
   init();window.addEventListener('resize',init);setInterval(draw,60);
 })();
 
+/* ── ENTRANCE ANIMATION ── */
 const ent=document.getElementById('entrance');
 if(sessionStorage.getItem('v')){ent.style.display='none'}
 else{sessionStorage.setItem('v','1');setTimeout(()=>ent.classList.add('hide'),1900);setTimeout(()=>ent.style.display='none',2900)}
 
+/* ── NAV SCROLL ── */
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
 
+/* ── MOBILE NAV DRAWER ── */
 const mt=document.getElementById('mt'),nd=document.getElementById('nd');
 mt.addEventListener('click',()=>{mt.classList.toggle('active');nd.classList.toggle('open');document.body.style.overflow=nd.classList.contains('open')?'hidden':'';});
 document.querySelectorAll('.nav-drawer a').forEach(a=>{a.addEventListener('click',()=>{mt.classList.remove('active');nd.classList.remove('open');document.body.style.overflow='';});});
 document.addEventListener('click',e=>{if(!e.target.closest('nav')&&!e.target.closest('.nav-drawer')){mt.classList.remove('active');nd.classList.remove('open');document.body.style.overflow='';}});
 
+/* ── SMOOTH SCROLL ── */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}});});
 
+/* ── REVEAL ON SCROLL ── */
 const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-scale').forEach(el=>ro.observe(el));
 
+/* ── SKILL BARS ── */
 document.querySelectorAll('.sfill').forEach(b=>{b.style.width=(parseFloat(b.dataset.w)*100)+'%'});
 const so=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.sfill').forEach(b=>b.classList.add('go'));});},{threshold:0.2});
 document.querySelectorAll('.sw').forEach(el=>so.observe(el));
 
+/* ── SCROLL PROGRESS BAR ── */
 const sp=document.getElementById('sp');
 window.addEventListener('scroll',()=>{const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;sp.style.width=pct+'%';},{passive:true});
 
+/* ── SECTION INDICATOR DOTS ── */
 const sections=['home','projects','education','skills','academic','contact'];
 const dots=document.querySelectorAll('.sec-dot');
 dots.forEach(d=>{d.addEventListener('click',()=>{const t=document.getElementById(d.dataset.section);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
 const sio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){dots.forEach(d=>d.classList.remove('active'));const active=document.querySelector(`.sec-dot[data-section="${e.target.id}"]`);if(active)active.classList.add('active');}});},{threshold:0.4});
 sections.forEach(id=>{const el=document.getElementById(id);if(el)sio.observe(el)});
 
+/* ── PARALLAX BLOBS ── */
 const b1=document.getElementById('b1'),b2=document.getElementById('b2'),b3=document.getElementById('b3');
 let ticking=false;
 window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{const y=window.scrollY;b1.style.transform=`translateY(${y*0.14}px)`;b2.style.transform=`translateY(${-y*0.09}px)`;b3.style.transform=`translateY(${y*0.06}px)`;ticking=false;});ticking=true;}},{passive:true});
 
+/* ── CUSTOM CURSOR ── */
 if(window.matchMedia('(pointer:fine)').matches){
   const cdot=document.getElementById('cdot');const cring=document.getElementById('cring');let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cdot.style.left=(mx-3)+'px';cdot.style.top=(my-3)+'px';});
@@ -671,8 +675,10 @@ if(window.matchMedia('(pointer:fine)').matches){
   document.querySelectorAll('a,button,.pcard,.sbtn,.stag').forEach(el=>{el.addEventListener('mouseenter',()=>cring.classList.add('hover'));el.addEventListener('mouseleave',()=>cring.classList.remove('hover'));});
 }else{document.getElementById('cdot').style.display='none';document.getElementById('cring').style.display='none';}
 
+/* ── NAV ACTIVE HIGHLIGHT ── */
 document.querySelectorAll('.nav-drawer a').forEach(a=>{a.addEventListener('click',function(){document.querySelectorAll('.nav-drawer a').forEach(x=>x.style.color='');this.style.color='var(--acc)';setTimeout(()=>this.style.color='',1200);});});
 
+/* ── PARALLAX TEXT ── */
 (function(){
   const slowEls=document.querySelectorAll('.par-slow');
   const tiltEls=document.querySelectorAll('.par-tilt');
@@ -684,6 +690,136 @@ document.querySelectorAll('.nav-drawer a').forEach(a=>{a.addEventListener('click
   }
   window.addEventListener('scroll',()=>{if(!rafId)rafId=requestAnimationFrame(applyParallax);},{passive:true});
   applyParallax();
+})();
+
+/* ══════════════════════════════════════════════
+   MOUSE TRACKING / GAZE EFFECT
+   Desktop  → mouse moves near photo → 3D tilt
+   Mobile   → touch drag on photo → tilt
+             → phone gyroscope → tilt
+   ══════════════════════════════════════════════ */
+(function(){
+  const frame = document.getElementById('imgFrame');
+  const wrap  = document.getElementById('gazeWrap');
+  const glow  = document.getElementById('gazeGlow');
+  if(!frame || !wrap || !glow) return;
+
+  const MAX_TILT  = 20;   // max rotation degrees
+  const MAX_SHIFT = 9;    // max translate px
+  const LERP_SPD  = 0.08; // smoothing (lower = smoother/slower)
+
+  let targetRX=0, targetRY=0, targetTX=0, targetTY=0;
+  let currentRX=0, currentRY=0, currentTX=0, currentTY=0;
+  let rafId=null, isNear=false;
+
+  function lerp(a,b,t){ return a+(b-a)*t; }
+
+  function tick(){
+    currentRX = lerp(currentRX, targetRX, LERP_SPD);
+    currentRY = lerp(currentRY, targetRY, LERP_SPD);
+    currentTX = lerp(currentTX, targetTX, LERP_SPD);
+    currentTY = lerp(currentTY, targetTY, LERP_SPD);
+
+    wrap.style.transform =
+      'rotateX('+currentRX+'deg) rotateY('+currentRY+'deg)'+
+      ' translate('+currentTX+'px,'+currentTY+'px)';
+
+    const stillMoving =
+      Math.abs(currentRX-targetRX)>0.005 ||
+      Math.abs(currentRY-targetRY)>0.005 ||
+      Math.abs(currentTX-targetTX)>0.005 ||
+      Math.abs(currentTY-targetTY)>0.005;
+
+    rafId = stillMoving ? requestAnimationFrame(tick) : null;
+  }
+
+  function startTick(){ if(!rafId) rafId=requestAnimationFrame(tick); }
+
+  function applyXY(clientX, clientY, rect){
+    const nx = (clientX - rect.left  - rect.width /2) / (rect.width /2);
+    const ny = (clientY - rect.top   - rect.height/2) / (rect.height/2);
+    const cx = Math.max(-1, Math.min(1, nx));
+    const cy = Math.max(-1, Math.min(1, ny));
+
+    targetRX = -cy * MAX_TILT;
+    targetRY =  cx * MAX_TILT;
+    targetTX =  cx * MAX_SHIFT;
+    targetTY =  cy * MAX_SHIFT;
+
+    // move glow
+    glow.style.left = (clientX - rect.left)  + 'px';
+    glow.style.top  = (clientY - rect.top)   + 'px';
+
+    // CSS radial overlay anchor
+    const px = ((clientX - rect.left)  / rect.width  * 100).toFixed(1);
+    const py = ((clientY - rect.top)   / rect.height * 100).toFixed(1);
+    frame.style.setProperty('--mx', px+'%');
+    frame.style.setProperty('--my', py+'%');
+
+    frame.classList.add('tracking');
+    startTick();
+  }
+
+  function reset(){
+    targetRX=0; targetRY=0; targetTX=0; targetTY=0;
+    frame.classList.remove('tracking');
+    startTick();
+  }
+
+  /* ── DESKTOP: follow mouse anywhere on page ── */
+  if(window.matchMedia('(pointer:fine)').matches){
+    document.addEventListener('mousemove', function(e){
+      const rect = frame.getBoundingClientRect();
+      const cx   = rect.left + rect.width/2;
+      const cy   = rect.top  + rect.height/2;
+      const dist = Math.hypot(e.clientX-cx, e.clientY-cy);
+      const radius = Math.max(rect.width, rect.height) * 1.5;
+
+      if(dist < radius){
+        if(!isNear) isNear=true;
+        applyXY(e.clientX, e.clientY, rect);
+      } else if(isNear){
+        isNear=false;
+        reset();
+      }
+    }, {passive:true});
+
+    document.addEventListener('mouseleave', function(){
+      if(isNear){ isNear=false; reset(); }
+    });
+
+  /* ── MOBILE: touch on the image frame ── */
+  } else {
+    frame.addEventListener('touchstart', function(e){
+      frame.classList.add('touch-active');
+      const t=e.touches[0];
+      applyXY(t.clientX, t.clientY, frame.getBoundingClientRect());
+    },{passive:true});
+
+    frame.addEventListener('touchmove', function(e){
+      const t=e.touches[0];
+      applyXY(t.clientX, t.clientY, frame.getBoundingClientRect());
+    },{passive:true});
+
+    frame.addEventListener('touchend', function(){
+      frame.classList.remove('touch-active');
+      reset();
+    },{passive:true});
+
+    /* gyroscope fallback for phone tilt */
+    if(window.DeviceOrientationEvent){
+      window.addEventListener('deviceorientation', function(e){
+        if(e.gamma===null) return;
+        const gamma = Math.max(-40,Math.min(40, e.gamma));
+        const beta  = Math.max(-40,Math.min(40,(e.beta||0)-25));
+        targetRX = -(beta /40)*MAX_TILT*0.45;
+        targetRY =  (gamma/40)*MAX_TILT*0.45;
+        targetTX =  (gamma/40)*MAX_SHIFT*0.45;
+        targetTY =  (beta /40)*MAX_SHIFT*0.45;
+        startTick();
+      },{passive:true});
+    }
+  }
 })();
 </script>
 </body>
