@@ -109,8 +109,8 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 .h-tag{display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--mono);font-size:0.6rem;color:var(--acc);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.6rem;padding:0.35rem 1rem;border:1px solid rgba(0,212,255,0.3);border-radius:30px;background:rgba(0,212,255,0.05)}
 .pdot{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:p-pulse 2s infinite}
 @keyframes p-pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,212,255,0.6)}60%{opacity:0.5;box-shadow:0 0 0 8px rgba(0,212,255,0)}}
-.h-name{font-family:var(--display);font-size:clamp(3.2rem,7vw,5.8rem);font-weight:800;line-height:0.9;color:#ffffff;margin-bottom:1rem;letter-spacing:-2px;text-shadow:0 4px 40px rgba(255,255,255,0.1)}
-.h-name span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--acc);font-style:italic;letter-spacing:-1px;text-shadow:none}
+.h-name{font-family:var(--display);font-size:clamp(3.2rem,7vw,5.8rem);font-weight:800;line-height:1;color:#ffffff;margin-bottom:1.2rem;letter-spacing:-2px;text-shadow:0 4px 40px rgba(255,255,255,0.1)}
+.h-name span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--acc);font-style:italic;letter-spacing:-1px;text-shadow:none;margin-top:0.1rem}
 .h-role{font-family:var(--mono);font-size:0.78rem;color:var(--gold2);margin-bottom:1.8rem;letter-spacing:1.5px;padding-left:1rem;border-left:2px solid var(--gold);font-weight:700;text-transform:uppercase}
 .h-bio{color:var(--text-m);font-size:1rem;line-height:1.9;max-width:460px;margin-bottom:2.2rem;font-weight:300}
 .h-bio strong{color:#ffffff;font-weight:600}
@@ -344,7 +344,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
   <div class="hero-inner">
     <div class="hero-text">
       <div class="h-tag reveal par-slow"><span class="pdot"></span>CSE Student — BRAC University</div>
-      <h1 class="h-name reveal d1 par-tilt">HRITHIK<span>ENGINEER</span></h1>
+      <h1 class="h-name reveal d1">HRITHIK<span>ENGINEER</span></h1>
       <div class="h-role reveal d2 par-slow">Full Stack Developer &amp; Problem Solver</div>
       <p class="h-bio reveal d3">Passionate <strong>Computer Science &amp; Engineering student</strong> at BRAC University. I build clean, purposeful software — from interactive web applications to embedded systems. Focused on turning complex ideas into polished, working products.</p>
       <div class="reveal d4" style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
@@ -518,10 +518,44 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
   <div class="ctag">CSE461 — Introduction to Robotics</div>
   <div class="hwgrid" style="grid-template-columns:1fr">
     <div class="hwcard reveal">
-      <div class="hw-img"><img src="https://i.imgur.com/KKUAmcn.jpg" alt="Robotics Project" loading="lazy"></div>
+      <div class="hw-img"><img src="https://i.imgur.com/KKUAmcn.jpg" alt="PoultryGuardian" loading="lazy"></div>
       <div class="hwinfo">
-        <h4>Robotics Project</h4>
-        <p>Obstacle avoidance, path planning &amp; real-time control. Built an autonomous robot integrating sensor arrays, motor control systems, and embedded navigation logic for dynamic environment response.</p>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.6rem;flex-wrap:wrap">
+          <h4 style="margin:0">PoultryGuardian</h4>
+          <span style="font-family:var(--mono);font-size:0.55rem;color:var(--acc);letter-spacing:2px;text-transform:uppercase;padding:0.2rem 0.6rem;border:1px solid rgba(0,212,255,0.25);border-radius:3px;background:rgba(0,212,255,0.05)">IoT · Embedded Systems</span>
+        </div>
+        <p style="margin-bottom:1.2rem">Smart automated poultry farm monitoring system — monitors temperature, humidity &amp; gas levels, automates feeding/watering, and prevents disease through real-time environmental control.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem">
+
+          <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.12);border-radius:6px;padding:0.9rem 1rem">
+            <div style="font-family:var(--mono);font-size:0.55rem;color:var(--acc);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--acc);display:inline-block"></span>Societal Impact</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.35rem">
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--acc)">›</span>Helps small farmers adopt smart farming affordably</li>
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--acc)">›</span>Supports food security &amp; steady poultry supply</li>
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--acc)">›</span>Motivates youth to see farming as a viable career</li>
+            </ul>
+          </div>
+
+          <div style="background:rgba(14,165,233,0.04);border:1px solid rgba(14,165,233,0.12);border-radius:6px;padding:0.9rem 1rem">
+            <div style="font-family:var(--mono);font-size:0.55rem;color:var(--p2);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--p2);display:inline-block"></span>Health &amp; Safety</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.35rem">
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--p2)">›</span>Reduces ammonia &amp; harmful gas exposure for farmers</li>
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--p2)">›</span>Prevents poultry disease via environment control</li>
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--p2)">›</span>Circuit fuses &amp; manual override ensure fail-safe ops</li>
+            </ul>
+          </div>
+
+          <div style="background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.12);border-radius:6px;padding:0.9rem 1rem">
+            <div style="font-family:var(--mono);font-size:0.55rem;color:var(--g2);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--g2);display:inline-block"></span>Legal &amp; Cultural</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.35rem">
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--g2)">›</span>Aligns with Bangladesh biosecurity &amp; livestock laws</li>
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--g2)">›</span>Tech as a helper, not a replacement for farmers</li>
+              <li style="font-size:0.8rem;color:var(--text-m);font-weight:300;padding-left:0.8rem;position:relative"><span style="position:absolute;left:0;color:var(--g2)">›</span>Reduces workload for women managing home poultry</li>
+            </ul>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
@@ -571,7 +605,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
   </div>
 </section>
 
-<footer><p>© 2025 Hrithik </p></footer>
+<footer><p>© 2025 Hrithik — Designed &amp; Built with Precision</p></footer>
 
 <script>
 (function(){
