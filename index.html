@@ -9,32 +9,14 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#060a12;
-  --bg2:#080e18;
-  --card:#0c1220;
-  --card2:#101828;
-  --border:rgba(0,180,255,0.18);
-  --border-h:rgba(0,220,255,0.5);
-  --p:#0ea5e9;
-  --p2:#38bdf8;
-  --p3:#7dd3fc;
-  --g:#f97316;
-  --g2:#fb923c;
-  --acc:#00d4ff;
-  --gold:#00d4ff;
-  --gold2:#67e8f9;
-  --text:#ffffff;
-  --text-b:#fff0fa;
-  --text-m:#b0cce0;
-  --text-s:#6a90a8;
-  --text-d:#1a3048;
-  --mono:'Space Mono',monospace;
-  --display:'Syne',sans-serif;
-  --body:'DM Sans',sans-serif;
-  --ease-out:cubic-bezier(0.22,1,0.36,1);
-  --ease-in-out:cubic-bezier(0.65,0,0.35,1);
+  --bg:#060a12;--bg2:#080e18;--card:#0c1220;--card2:#101828;
+  --border:rgba(0,180,255,0.18);--border-h:rgba(0,220,255,0.5);
+  --p:#0ea5e9;--p2:#38bdf8;--p3:#7dd3fc;--g:#f97316;--g2:#fb923c;
+  --acc:#00d4ff;--gold:#00d4ff;--gold2:#67e8f9;
+  --text:#ffffff;--text-b:#fff0fa;--text-m:#b0cce0;--text-s:#6a90a8;--text-d:#1a3048;
+  --mono:'Space Mono',monospace;--display:'Syne',sans-serif;--body:'DM Sans',sans-serif;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);--ease-in-out:cubic-bezier(0.65,0,0.35,1);
 }
-
 html{scroll-behavior:smooth}
 body{font-family:var(--body);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
 ::-webkit-scrollbar{width:2px}
@@ -42,12 +24,8 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);overflow-x:h
 ::-webkit-scrollbar-thumb{background:rgba(0,212,255,0.6);border-radius:2px}
 
 #mc{position:fixed;inset:0;z-index:0;opacity:0.07;pointer-events:none}
-.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:128px;
-}
-.scan{position:fixed;inset:0;z-index:2;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(180,50,180,0.012) 3px,rgba(180,50,180,0.012) 4px)}
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px}
+.scan{position:fixed;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(180,50,180,0.012) 3px,rgba(180,50,180,0.012) 4px)}
 .blob{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:1;will-change:transform}
 .b1{width:520px;height:520px;background:radial-gradient(circle,rgba(0,212,255,0.1),transparent 70%);top:-100px;left:-160px}
 .b2{width:400px;height:400px;background:radial-gradient(circle,rgba(14,165,233,0.06),transparent 70%);bottom:10%;right:-100px}
@@ -126,19 +104,12 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 .h-img-wrap{position:relative;display:flex;justify-content:center}
 .h-img-frame{position:relative;width:320px;height:400px;border:1px solid rgba(0,212,255,0.2);border-radius:8px;overflow:hidden;transform-style:preserve-3d;perspective:800px;transition:box-shadow 0.3s ease}
 .h-img-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,8,16,0.6) 100%);z-index:1;pointer-events:none}
-
-/* ── MOUSE TRACKING OVERLAY GRADIENT ── */
 .h-img-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,212,255,0.13) 0%,transparent 65%);z-index:2;pointer-events:none;border-radius:8px;opacity:0;transition:opacity 0.3s ease}
 .h-img-frame:hover::before,.h-img-frame.touch-active::before{opacity:1}
 .h-img-frame.tracking{box-shadow:0 0 30px rgba(0,212,255,0.25),0 0 60px rgba(0,212,255,0.1),inset 0 0 20px rgba(0,212,255,0.05)}
-
-/* ── GAZE WRAP ── */
 .h-img-gaze-wrap{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.08s linear;will-change:transform}
-
-/* ── GLOW DOT that follows mouse ── */
 .h-img-glow{position:absolute;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.38) 0%,transparent 70%);pointer-events:none;z-index:5;transform:translate(-50%,-50%);opacity:0;transition:opacity 0.3s ease;mix-blend-mode:screen}
 .h-img-frame:hover .h-img-glow,.h-img-frame.touch-active .h-img-glow{opacity:1}
-
 .corner{position:absolute;width:16px;height:16px;border-color:var(--p2);border-style:solid;z-index:6;transition:all 0.3s}
 .h-img-frame:hover .tl{top:-3px;left:-3px}
 .h-img-frame:hover .tr{top:-3px;right:-3px}
@@ -148,14 +119,11 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 .tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
 .bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
 .br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
-
 .h-img-gaze-wrap img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.7s var(--ease-out);filter:brightness(0.95) contrast(1.04)}
 .h-img-frame:hover .h-img-gaze-wrap img{filter:brightness(1) contrast(1.06)}
-
 .h-badge{position:absolute;bottom:-14px;left:-18px;z-index:3;background:var(--card2);border:1px solid rgba(0,212,255,0.3);border-radius:6px;padding:0.8rem 1.1rem;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
 .h-badge .n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:var(--gold);line-height:1}
 .h-badge .l{font-family:var(--mono);font-size:0.55rem;color:var(--text-m);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
-
 .stat-row{display:flex;gap:2.5rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap}
 .stat{display:flex;flex-direction:column;gap:0.2rem}
 .stat .n{font-family:var(--display);font-size:1.6rem;font-weight:800;color:var(--gold)}
@@ -171,13 +139,16 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 .mqtrack span.hi{color:var(--gold);opacity:0.85}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+/* ══ PROJECT CARDS — FIXED ══ */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.4rem}
-.pcard{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem;transition:all 0.4s var(--ease-out);position:relative;overflow:hidden;cursor:pointer}
-.pcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.05),transparent 60%);opacity:0;transition:opacity 0.4s}
-.pcard::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p),var(--acc),var(--g2));transform:scaleX(0);transform-origin:left;transition:transform 0.5s var(--ease-out)}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem;transition:all 0.4s var(--ease-out);position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.05),transparent 60%);opacity:0;transition:opacity 0.4s;pointer-events:none;z-index:0}
+.pcard::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p),var(--acc),var(--g2));transform:scaleX(0);transform-origin:left;transition:transform 0.5s var(--ease-out);pointer-events:none;z-index:0}
 .pcard:hover::before{opacity:1}
 .pcard:hover::after{transform:scaleX(1)}
 .pcard:hover{border-color:rgba(0,212,255,0.35);transform:translateY(-6px);box-shadow:0 28px 56px rgba(0,0,0,0.7),0 0 50px rgba(0,212,255,0.1);background:var(--card2)}
+/* All direct children of pcard sit above the pseudo overlays */
+.pcard > *{position:relative;z-index:1}
 .pbadge{display:inline-flex;align-items:center;gap:0.45rem;margin-bottom:1.1rem;font-family:var(--mono);font-size:0.56rem;letter-spacing:1.5px;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:3px}
 .b-ind{background:rgba(245,158,11,0.07);color:var(--acc);border:1px solid rgba(245,158,11,0.22)}
 .b-pop{background:rgba(255,107,53,0.06);color:var(--g2);border:1px solid rgba(255,107,53,0.25)}
@@ -188,10 +159,13 @@ section{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 
 .pico svg{width:16px;height:16px}
 .pcard h3{font-family:var(--display);font-size:1.2rem;font-weight:800;color:#ffffff;margin-bottom:0.5rem;letter-spacing:-0.3px}
 .pcard p{color:var(--text-m);font-size:0.9rem;line-height:1.8;margin-bottom:1.4rem;font-weight:300}
-.plink{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.65rem;color:var(--p3);text-decoration:none;letter-spacing:0.5px;text-transform:uppercase;transition:all 0.25s}
-.plink .arrow{transition:transform 0.25s var(--ease-out)}
-.plink:hover{color:var(--gold)}
-.plink:hover .arrow{transform:translate(3px,-3px)}
+/* ── KEY FIX: plink is always clickable, above pseudo overlays ── */
+.plink{display:inline-flex;align-items:center;gap:0.55rem;font-family:var(--mono);font-size:0.63rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;padding:0.55rem 1.15rem;border-radius:6px;border:1px solid rgba(251,146,60,0.55);color:#fb923c;background:rgba(251,146,60,0.08);box-shadow:0 0 12px rgba(251,146,60,0.15),inset 0 0 8px rgba(251,146,60,0.04);transition:all 0.28s var(--ease-out);position:relative;z-index:2;cursor:pointer}
+.plink .arrow{transition:transform 0.28s var(--ease-out);font-size:0.75rem}
+.plink:hover{color:#ffffff;background:rgba(251,146,60,0.18);border-color:rgba(251,146,60,0.9);box-shadow:0 0 22px rgba(251,146,60,0.4),0 0 6px rgba(251,146,60,0.2),inset 0 0 12px rgba(251,146,60,0.08);transform:translateY(-2px)}
+.plink:hover .arrow{transform:translate(4px,-4px)}
+.plink-pink{color:#f472b6;border-color:rgba(244,114,182,0.55);background:rgba(244,114,182,0.08);box-shadow:0 0 12px rgba(244,114,182,0.15),inset 0 0 8px rgba(244,114,182,0.04)}
+.plink-pink:hover{color:#ffffff;background:rgba(244,114,182,0.18);border-color:rgba(244,114,182,0.9);box-shadow:0 0 22px rgba(244,114,182,0.45),0 0 6px rgba(244,114,182,0.2),inset 0 0 12px rgba(244,114,182,0.08)}
 
 .edu-list{display:flex;flex-direction:column;gap:1.2rem;padding-left:2rem;position:relative}
 .edu-list::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--p),rgba(0,212,255,0.05))}
@@ -360,7 +334,6 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
       <div class="h-img-frame" id="imgFrame">
         <div class="corner tl"></div><div class="corner tr"></div>
         <div class="corner bl"></div><div class="corner br"></div>
-        <!-- GAZE WRAP — mouse tracking inner container -->
         <div class="h-img-gaze-wrap" id="gazeWrap">
           <div class="h-img-glow" id="gazeGlow"></div>
           <img src="https://i.imgur.com/Ywo1SIi.jpg" alt="Hrithik">
@@ -403,7 +376,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
       </div>
       <h3>Ominelle</h3>
       <p>Production-grade platform actively used by real users and adopted by a company. Built for reliability and real-world scale.</p>
-      <a href="https://ominelle.vercel.app/" target="_blank" class="plink">Visit Platform <span class="arrow">↗</span></a>
+      <a href="https://ominelle.vercel.app/" target="_blank" rel="noopener noreferrer" class="plink plink-pink">Visit Platform <span class="arrow">↗</span></a>
     </div>
     <div class="pcard reveal d1">
       <div class="pbadge b-pop"><span class="bdot"></span>Most Popular</div>
@@ -412,7 +385,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
       </div>
       <h3>Text to Handwritten</h3>
       <p>Convert typed text into handwritten-style notes instantly. A unique tool loved by students and creators worldwide.</p>
-      <a href="https://text-to-handwritten-hrithik.vercel.app/" target="_blank" class="plink">View Project <span class="arrow">↗</span></a>
+      <a href="https://text-to-handwritten-hrithik.vercel.app/" target="_blank" rel="noopener noreferrer" class="plink">View Project <span class="arrow">↗</span></a>
     </div>
     <div class="pcard reveal d2">
       <div class="pbadge b-live"><span class="bdot"></span>Live</div>
@@ -421,7 +394,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
       </div>
       <h3>StudyMate+</h3>
       <p>Smart study companion with AI-powered flashcard generator, interactive quiz maker, and focus timer.</p>
-      <a href="https://hrithik220.github.io/studymate/" target="_blank" class="plink">View Project <span class="arrow">↗</span></a>
+      <a href="https://hrithik220.github.io/studymate/" target="_blank" rel="noopener noreferrer" class="plink">View Project <span class="arrow">↗</span></a>
     </div>
     <div class="pcard reveal">
       <div class="pbadge b-live"><span class="bdot"></span>Live</div>
@@ -430,7 +403,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
       </div>
       <h3>Skincare Bot</h3>
       <p>Interactive skincare recommendation assistant helping users find the perfect routine through guided questions.</p>
-      <a href="https://hrithik220.github.io/-hrithik-skincare-bot/" target="_blank" class="plink">View Project <span class="arrow">↗</span></a>
+      <a href="https://hrithik220.github.io/-hrithik-skincare-bot/" target="_blank" rel="noopener noreferrer" class="plink">View Project <span class="arrow">↗</span></a>
     </div>
     <div class="pcard reveal d1">
       <div class="pbadge b-live"><span class="bdot"></span>Live</div>
@@ -439,7 +412,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
       </div>
       <h3>Avengers Health Monitor</h3>
       <p>Superhero-themed health monitoring application with interactive tracking and real-time UI updates.</p>
-      <a href="https://hrithik220.github.io/avengers-health-monitor" target="_blank" class="plink">View Project <span class="arrow">↗</span></a>
+      <a href="https://hrithik220.github.io/avengers-health-monitor" target="_blank" rel="noopener noreferrer" class="plink">View Project <span class="arrow">↗</span></a>
     </div>
     <div class="pcard reveal d2">
       <div class="pbadge b-live"><span class="bdot"></span>Live</div>
@@ -448,7 +421,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
       </div>
       <h3>Doraemon Tic Tac Toe</h3>
       <p>Polished Doraemon-themed game with smooth animations and player vs player mode.</p>
-      <a href="https://hrithik220.github.io/my-doraemon-game/" target="_blank" class="plink">View Project <span class="arrow">↗</span></a>
+      <a href="https://hrithik220.github.io/my-doraemon-game/" target="_blank" rel="noopener noreferrer" class="plink">View Project <span class="arrow">↗</span></a>
     </div>
   </div>
 </section>
@@ -512,7 +485,6 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
   <div class="lbl">University Work</div>
   <div class="stitle par-tilt">Hardware <span class="ag">Projects</span></div>
   <p style="color:var(--text-m);margin-bottom:2.5rem;max-width:560px;font-size:0.9rem;font-weight:300;line-height:1.8">Hands-on lab and coursework at BRAC University — applying theory to real circuits and embedded systems.</p>
-
   <div class="ctag">CSE461 — Introduction to Robotics</div>
   <div class="hwgrid" style="grid-template-columns:1fr">
     <div class="hwcard reveal">
@@ -598,7 +570,7 @@ footer p{font-family:var(--mono);font-size:0.6rem;color:var(--text-d);letter-spa
   </div>
 </section>
 
-<footer><p>© 2025 Hrithik </p></footer>
+<footer><p>© 2025 Hrithik</p></footer>
 
 <script>
 /* ── MATRIX BACKGROUND ── */
@@ -692,130 +664,57 @@ document.querySelectorAll('.nav-drawer a').forEach(a=>{a.addEventListener('click
   applyParallax();
 })();
 
-/* ══════════════════════════════════════════════
-   MOUSE TRACKING / GAZE EFFECT
-   Desktop  → mouse moves near photo → 3D tilt
-   Mobile   → touch drag on photo → tilt
-             → phone gyroscope → tilt
-   ══════════════════════════════════════════════ */
+/* ── MOUSE TRACKING / GAZE EFFECT ── */
 (function(){
-  const frame = document.getElementById('imgFrame');
-  const wrap  = document.getElementById('gazeWrap');
-  const glow  = document.getElementById('gazeGlow');
-  if(!frame || !wrap || !glow) return;
-
-  const MAX_TILT  = 20;   // max rotation degrees
-  const MAX_SHIFT = 9;    // max translate px
-  const LERP_SPD  = 0.08; // smoothing (lower = smoother/slower)
-
-  let targetRX=0, targetRY=0, targetTX=0, targetTY=0;
-  let currentRX=0, currentRY=0, currentTX=0, currentTY=0;
-  let rafId=null, isNear=false;
-
-  function lerp(a,b,t){ return a+(b-a)*t; }
-
+  const frame=document.getElementById('imgFrame');
+  const wrap=document.getElementById('gazeWrap');
+  const glow=document.getElementById('gazeGlow');
+  if(!frame||!wrap||!glow)return;
+  const MAX_TILT=20,MAX_SHIFT=9,LERP_SPD=0.08;
+  let targetRX=0,targetRY=0,targetTX=0,targetTY=0;
+  let currentRX=0,currentRY=0,currentTX=0,currentTY=0;
+  let rafId=null,isNear=false;
+  function lerp(a,b,t){return a+(b-a)*t}
   function tick(){
-    currentRX = lerp(currentRX, targetRX, LERP_SPD);
-    currentRY = lerp(currentRY, targetRY, LERP_SPD);
-    currentTX = lerp(currentTX, targetTX, LERP_SPD);
-    currentTY = lerp(currentTY, targetTY, LERP_SPD);
-
-    wrap.style.transform =
-      'rotateX('+currentRX+'deg) rotateY('+currentRY+'deg)'+
-      ' translate('+currentTX+'px,'+currentTY+'px)';
-
-    const stillMoving =
-      Math.abs(currentRX-targetRX)>0.005 ||
-      Math.abs(currentRY-targetRY)>0.005 ||
-      Math.abs(currentTX-targetTX)>0.005 ||
-      Math.abs(currentTY-targetTY)>0.005;
-
-    rafId = stillMoving ? requestAnimationFrame(tick) : null;
+    currentRX=lerp(currentRX,targetRX,LERP_SPD);currentRY=lerp(currentRY,targetRY,LERP_SPD);
+    currentTX=lerp(currentTX,targetTX,LERP_SPD);currentTY=lerp(currentTY,targetTY,LERP_SPD);
+    wrap.style.transform='rotateX('+currentRX+'deg) rotateY('+currentRY+'deg) translate('+currentTX+'px,'+currentTY+'px)';
+    const stillMoving=Math.abs(currentRX-targetRX)>0.005||Math.abs(currentRY-targetRY)>0.005||Math.abs(currentTX-targetTX)>0.005||Math.abs(currentTY-targetTY)>0.005;
+    rafId=stillMoving?requestAnimationFrame(tick):null;
   }
-
-  function startTick(){ if(!rafId) rafId=requestAnimationFrame(tick); }
-
-  function applyXY(clientX, clientY, rect){
-    const nx = (clientX - rect.left  - rect.width /2) / (rect.width /2);
-    const ny = (clientY - rect.top   - rect.height/2) / (rect.height/2);
-    const cx = Math.max(-1, Math.min(1, nx));
-    const cy = Math.max(-1, Math.min(1, ny));
-
-    targetRX = -cy * MAX_TILT;
-    targetRY =  cx * MAX_TILT;
-    targetTX =  cx * MAX_SHIFT;
-    targetTY =  cy * MAX_SHIFT;
-
-    // move glow
-    glow.style.left = (clientX - rect.left)  + 'px';
-    glow.style.top  = (clientY - rect.top)   + 'px';
-
-    // CSS radial overlay anchor
-    const px = ((clientX - rect.left)  / rect.width  * 100).toFixed(1);
-    const py = ((clientY - rect.top)   / rect.height * 100).toFixed(1);
-    frame.style.setProperty('--mx', px+'%');
-    frame.style.setProperty('--my', py+'%');
-
-    frame.classList.add('tracking');
-    startTick();
+  function startTick(){if(!rafId)rafId=requestAnimationFrame(tick)}
+  function applyXY(clientX,clientY,rect){
+    const nx=(clientX-rect.left-rect.width/2)/(rect.width/2);
+    const ny=(clientY-rect.top-rect.height/2)/(rect.height/2);
+    const cx=Math.max(-1,Math.min(1,nx));const cy=Math.max(-1,Math.min(1,ny));
+    targetRX=-cy*MAX_TILT;targetRY=cx*MAX_TILT;targetTX=cx*MAX_SHIFT;targetTY=cy*MAX_SHIFT;
+    glow.style.left=(clientX-rect.left)+'px';glow.style.top=(clientY-rect.top)+'px';
+    const px=((clientX-rect.left)/rect.width*100).toFixed(1);
+    const py=((clientY-rect.top)/rect.height*100).toFixed(1);
+    frame.style.setProperty('--mx',px+'%');frame.style.setProperty('--my',py+'%');
+    frame.classList.add('tracking');startTick();
   }
-
-  function reset(){
-    targetRX=0; targetRY=0; targetTX=0; targetTY=0;
-    frame.classList.remove('tracking');
-    startTick();
-  }
-
-  /* ── DESKTOP: follow mouse anywhere on page ── */
+  function reset(){targetRX=0;targetRY=0;targetTX=0;targetTY=0;frame.classList.remove('tracking');startTick()}
   if(window.matchMedia('(pointer:fine)').matches){
-    document.addEventListener('mousemove', function(e){
-      const rect = frame.getBoundingClientRect();
-      const cx   = rect.left + rect.width/2;
-      const cy   = rect.top  + rect.height/2;
-      const dist = Math.hypot(e.clientX-cx, e.clientY-cy);
-      const radius = Math.max(rect.width, rect.height) * 1.5;
-
-      if(dist < radius){
-        if(!isNear) isNear=true;
-        applyXY(e.clientX, e.clientY, rect);
-      } else if(isNear){
-        isNear=false;
-        reset();
-      }
-    }, {passive:true});
-
-    document.addEventListener('mouseleave', function(){
-      if(isNear){ isNear=false; reset(); }
-    });
-
-  /* ── MOBILE: touch on the image frame ── */
-  } else {
-    frame.addEventListener('touchstart', function(e){
-      frame.classList.add('touch-active');
-      const t=e.touches[0];
-      applyXY(t.clientX, t.clientY, frame.getBoundingClientRect());
+    document.addEventListener('mousemove',function(e){
+      const rect=frame.getBoundingClientRect();
+      const cx=rect.left+rect.width/2;const cy=rect.top+rect.height/2;
+      const dist=Math.hypot(e.clientX-cx,e.clientY-cy);
+      const radius=Math.max(rect.width,rect.height)*1.5;
+      if(dist<radius){if(!isNear)isNear=true;applyXY(e.clientX,e.clientY,rect);}
+      else if(isNear){isNear=false;reset();}
     },{passive:true});
-
-    frame.addEventListener('touchmove', function(e){
-      const t=e.touches[0];
-      applyXY(t.clientX, t.clientY, frame.getBoundingClientRect());
-    },{passive:true});
-
-    frame.addEventListener('touchend', function(){
-      frame.classList.remove('touch-active');
-      reset();
-    },{passive:true});
-
-    /* gyroscope fallback for phone tilt */
+    document.addEventListener('mouseleave',function(){if(isNear){isNear=false;reset();}});
+  }else{
+    frame.addEventListener('touchstart',function(e){frame.classList.add('touch-active');const t=e.touches[0];applyXY(t.clientX,t.clientY,frame.getBoundingClientRect());},{passive:true});
+    frame.addEventListener('touchmove',function(e){const t=e.touches[0];applyXY(t.clientX,t.clientY,frame.getBoundingClientRect());},{passive:true});
+    frame.addEventListener('touchend',function(){frame.classList.remove('touch-active');reset();},{passive:true});
     if(window.DeviceOrientationEvent){
-      window.addEventListener('deviceorientation', function(e){
-        if(e.gamma===null) return;
-        const gamma = Math.max(-40,Math.min(40, e.gamma));
-        const beta  = Math.max(-40,Math.min(40,(e.beta||0)-25));
-        targetRX = -(beta /40)*MAX_TILT*0.45;
-        targetRY =  (gamma/40)*MAX_TILT*0.45;
-        targetTX =  (gamma/40)*MAX_SHIFT*0.45;
-        targetTY =  (beta /40)*MAX_SHIFT*0.45;
+      window.addEventListener('deviceorientation',function(e){
+        if(e.gamma===null)return;
+        const gamma=Math.max(-40,Math.min(40,e.gamma));const beta=Math.max(-40,Math.min(40,(e.beta||0)-25));
+        targetRX=-(beta/40)*MAX_TILT*0.45;targetRY=(gamma/40)*MAX_TILT*0.45;
+        targetTX=(gamma/40)*MAX_SHIFT*0.45;targetTY=(beta/40)*MAX_SHIFT*0.45;
         startTick();
       },{passive:true});
     }
