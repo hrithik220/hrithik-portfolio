@@ -187,9 +187,12 @@ section{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:6.5re
 .sfill{height:100%;background:var(--accent);border-radius:3px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s var(--ease)}
 .sfill.go{transform:scaleX(1)}
 .spct{font-family:var(--mono);font-size:0.68rem;color:var(--text-faint);width:32px;text-align:right}
-.stags{display:flex;flex-wrap:wrap;gap:0.5rem}
-.stag{font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);padding:0.4rem 0.8rem;border:1px solid var(--border);border-radius:20px;background:var(--surface);transition:all 0.2s}
+.stags{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem 0.7rem}
+.stag{font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);padding:0.5rem 0.8rem;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);transition:all 0.2s;line-height:1.4;display:flex;align-items:center}
 .stag:hover{color:var(--text);border-color:var(--border-hover)}
+.subj-cat{font-family:var(--mono);font-size:0.64rem;color:var(--accent);letter-spacing:0.4px;font-weight:500;margin:1.5rem 0 0.75rem;text-transform:uppercase}
+.subj-cat:first-child{margin-top:0}
+@media(max-width:480px){.stags{grid-template-columns:1fr}}
 
 .ctag{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.3px;padding:0.5rem 1rem;border:1px solid var(--border);border-radius:20px;margin-bottom:1.6rem}
 
@@ -478,23 +481,46 @@ footer p{font-family:var(--mono);font-size:0.65rem;color:var(--text-faint)}
     </div>
     <div>
       <div class="sclbl">Academic Subjects</div>
-      <div class="stags reveal">
-        <span class="stag">Calculus I &amp; II</span><span class="stag">Statistics &amp; Probability</span>
-        <span class="stag">Discrete Mathematics</span><span class="stag">Linear Algebra</span>
-        <span class="stag">Mathematics III</span><span class="stag">Mathematics IV</span>
-        <span class="stag">Laplace Transforms</span><span class="stag">Numerical Methods</span>
-        <span class="stag">Data Communications</span><span class="stag">Circuits &amp; Electronics</span>
-        <span class="stag">Digital Logic Design</span><span class="stag">Electronic Devices &amp; Circuits</span>
-        <span class="stag">Digital Electronics &amp; Pulse Techniques</span>
-        <span class="stag">Computer Architecture</span><span class="stag">Microprocessors</span>
-        <span class="stag">Automata &amp; Computability</span><span class="stag">Database Systems</span>
-        <span class="stag">Computer Graphics</span><span class="stag">Data Structures</span>
-        <span class="stag">Algorithms</span><span class="stag">Operating Systems</span>
-        <span class="stag">Object Oriented Programming</span><span class="stag">Software Engineering</span>
-        <span class="stag">Computer Interfacing</span><span class="stag">VLSI Design</span>
-        <span class="stag">Systems Analysis &amp; Design</span><span class="stag">Compiler Design</span>
-        <span class="stag">Computer Networks</span><span class="stag">Artificial Intelligence</span>
-        <span class="stag">Robotics</span>
+      <div class="reveal">
+        <div class="subj-cat">Mathematics &amp; Theory</div>
+        <div class="stags">
+          <span class="stag">Calculus I &amp; II</span>
+          <span class="stag">Linear Algebra</span>
+          <span class="stag">Discrete Mathematics</span>
+          <span class="stag">Mathematics III</span>
+          <span class="stag">Statistics &amp; Probability</span>
+          <span class="stag">Mathematics IV</span>
+          <span class="stag">Laplace Transforms</span>
+          <span class="stag">Automata &amp; Computability</span>
+          <span class="stag">Numerical Methods</span>
+        </div>
+        <div class="subj-cat">Core Computer Science</div>
+        <div class="stags">
+          <span class="stag">Data Structures</span>
+          <span class="stag">Operating Systems</span>
+          <span class="stag">Algorithms</span>
+          <span class="stag">Object Oriented Programming</span>
+          <span class="stag">Database Systems</span>
+          <span class="stag">Software Engineering</span>
+          <span class="stag">Computer Graphics</span>
+          <span class="stag">Systems Analysis &amp; Design</span>
+          <span class="stag">Computer Networks</span>
+          <span class="stag">Compiler Design</span>
+          <span class="stag">Artificial Intelligence</span>
+        </div>
+        <div class="subj-cat">Systems &amp; Hardware</div>
+        <div class="stags">
+          <span class="stag">Digital Logic Design</span>
+          <span class="stag">Computer Architecture</span>
+          <span class="stag">Circuits &amp; Electronics</span>
+          <span class="stag">Microprocessors</span>
+          <span class="stag">Electronic Devices &amp; Circuits</span>
+          <span class="stag">Computer Interfacing</span>
+          <span class="stag">Digital Electronics &amp; Pulse Techniques</span>
+          <span class="stag">VLSI Design</span>
+          <span class="stag">Data Communications</span>
+          <span class="stag">Robotics</span>
+        </div>
       </div>
     </div>
   </div>
