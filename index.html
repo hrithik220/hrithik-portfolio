@@ -371,9 +371,16 @@ for(let i=0;i<14;i++){let ind=(i%4)*24+14;x.fillStyle=cols[(i*3)%5];x.fillRect(i
 const tex=new THREE.CanvasTexture(cs);tex.encoding=THREE.sRGBEncoding;
 const scr=new THREE.Mesh(new THREE.PlaneGeometry(.66,.41),new THREE.MeshBasicMaterial({map:tex}));scr.position.set(0,.235,.011);hinge.add(scr);
 
-/* mug with handle */
-cyl(.06,.055,.1,0xffb648,.88,.83,-.2,g,.35);
-const hd=new THREE.Mesh(new THREE.TorusGeometry(.034,.009,8,16,Math.PI),M(0xffb648,.35));hd.rotation.z=-Math.PI/2;hd.position.set(.935,.83,-.2);g.add(hd);
+/* iced latte in a glass with a straw (grouped so it can be picked up) */
+const mug=new THREE.Group();mug.position.set(.88,.83,-.2);g.add(mug);
+const GL=(rt,rb,h,c,y,o,open)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,28,1,open),new THREE.MeshStandardMaterial({color:c,roughness:.08,metalness:.1,transparent:true,opacity:o,side:THREE.DoubleSide,depthWrite:false}));m.position.y=y;mug.add(m);return m};
+cyl(.0455,.040,.084,0xefe0cb,0,.004,0,mug,.6);      /* milk */
+cyl(.0462,.0455,.014,0xb98a5e,0,.05,0,mug,.5);      /* latte blend */
+cyl(.0475,.0455,.05,0x6b3f25,0,.071,0,mug,.5);      /* espresso on top */
+GL(.05,.042,.16,0xdfe9ff,.03,.22,true);             /* glass */
+GL(.042,.042,.012,0xdfe9ff,-.044,.5,false);         /* thick glass base */
+[[-.018,.097,.008,.4],[.016,.099,-.012,1.1],[.002,.1,.02,.7]].forEach(q=>{const c=new THREE.Mesh(new THREE.BoxGeometry(.024,.024,.024),new THREE.MeshStandardMaterial({color:0xeaf6ff,roughness:.15,transparent:true,opacity:.75}));c.position.set(q[0],q[1],q[2]);c.rotation.set(q[3],q[3]*1.7,q[3]*.6);mug.add(c)});
+const straw=cyl(.0055,.0055,.2,0xff6b8a,.012,.07,0,mug,.4);straw.rotation.z=-.1;
 
 /* DSLR camera on the desk (left) */
 const cam=new THREE.Group();cam.position.set(-.58,.78,-.48);cam.rotation.y=.55;g.add(cam);
@@ -398,6 +405,8 @@ sph(.02,0xd7263d,.03,.143,.01,cake,null,.3);
 cyl(.006,.006,.055,0xffffff,0,.152,-.02,cake);
 const flame=new THREE.Mesh(new THREE.SphereGeometry(.012,12,12),B(0xffc84a));flame.position.set(0,.19,-.02);flame.scale.set(1,1.5,1);cake.add(flame);
 const fl=new THREE.PointLight(0xffb060,.5,1.2);fl.position.set(0,.22,-.02);cake.add(fl);
+/* cake piece that gets picked up and eaten */
+const bite=sph(.022,0xffc8d8,0,0,0,g,[1,.8,1],.8);bite.visible=false;
 
 /* Funko-style pop figures (back row, facing the viewer) */
 function funko(x,z,rot,bodyC,headC,kind){
@@ -411,9 +420,10 @@ function funko(x,z,rot,bodyC,headC,kind){
   else{[-1,1].forEach(q=>sph(.0115,0x111111,q*.022,.152,.056,f,[1,1.3,.5],.3))}
   if(kind==='spiky'){for(let i=-2;i<=2;i++){const c=new THREE.Mesh(new THREE.ConeGeometry(.016,.045,10),M(0x2a1b12));c.position.set(i*.024,.207-Math.abs(i)*.007,0);c.rotation.z=-i*.25;f.add(c)}}
   if(kind==='cap'){cyl(.064,.064,.03,0xffd23f,0,.2,0,f);box(.09,.008,.05,0xffd23f,0,.188,.062,f)}
+  return f;
 }
 funko(.46,-.68,.25,0x2b6de0,0xf5cfa5,'spiky');
-funko(.72,-.66,0,0xd7263d,0xd7263d,'hood');
+const toy=funko(.72,-.66,0,0xd7263d,0xd7263d,'hood');
 funko(.98,-.68,-.25,0x2fbf71,0xf5cfa5,'cap');
 
 /* small chair — low backrest so the jersey name stays visible */
@@ -421,6 +431,7 @@ box(.56,.06,.56,0x1d2540,0,.48,.55,g,.8);box(.5,.18,.05,0x1d2540,0,.6,.82,g,.8);
 cyl(.04,.04,.45,0x0a0e1c,0,.24,.55);cyl(.38,.38,.04,0x0a0e1c,0,.03,.55);
 
 /* person */
+const upper=new THREE.Group();g.add(upper); /* upper body: leans forward when reaching */
 const SK=0xe8b48e,SH=0xf4f6fb,GOLD=0xd4af37,NAVY=0x1b2a6b;
 function jt(back){const c=document.createElement('canvas');c.width=512;c.height=600;const q=c.getContext('2d');
   const gr=q.createLinearGradient(0,0,0,600);gr.addColorStop(0,'#ffffff');gr.addColorStop(1,'#e4e8f1');q.fillStyle=gr;q.fillRect(0,0,512,600);
@@ -438,38 +449,90 @@ function jt(back){const c=document.createElement('canvas');c.width=512;c.height=
   }
   const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return new THREE.MeshStandardMaterial({map:t,roughness:.85})}
 const W=M(SH,.85);
-const torso=new THREE.Mesh(new THREE.BoxGeometry(.5,.6,.28),[W,W,W,W,jt(1),jt(0)]);torso.position.set(0,.84,.6);torso.rotation.x=-.12;g.add(torso);
+const torso=new THREE.Mesh(new THREE.BoxGeometry(.5,.6,.28),[W,W,W,W,jt(1),jt(0)]);torso.position.set(0,.84,.6);torso.rotation.x=-.12;upper.add(torso);
 box(.5,.14,.3,0xe9ecf5,0,.5,.62,g,.85);
-[-1,1].forEach(sx=>sph(.085,SH,sx*.29,1.06,.6,g,null,.85));
-cyl(.06,.065,.12,SK,0,1.17,.56,g,.6);
-const HR=.23,head=new THREE.Group();head.position.set(0,1.4,.52);g.add(head);
+[-1,1].forEach(sx=>sph(.085,SH,sx*.29,1.06,.6,upper,null,.85));
+cyl(.06,.065,.12,SK,0,1.17,.56,upper,.6);
+const HR=.23,head=new THREE.Group();head.position.set(0,1.4,.52);upper.add(head);
 head.add(new THREE.Mesh(new THREE.SphereGeometry(HR,32,32),M(SK,.55)));
-const hair=new THREE.Mesh(new THREE.SphereGeometry(HR*1.07,32,32,0,Math.PI*2,0,Math.PI*.52),M(0x15110f,.9));hair.position.set(0,.01,.025);hair.rotation.x=.5;head.add(hair);
+const hair=new THREE.Mesh(new THREE.SphereGeometry(HR*1.12,32,32,0,Math.PI*2,0,Math.PI*.55),M(0x08080a,.8));hair.position.set(0,.02,.03);hair.rotation.x=.5;head.add(hair);
+/* hair strands: tufts over the cap for volume, plus a swept fringe */
+const HG=new THREE.SphereGeometry(1,12,10),HM=[M(0x08080a,.7),M(0x0e0e12,.6),M(0x17171d,.5)],HRR=HR*1.12;
+const clump=(th,ph,r,out,k)=>{const n=V(Math.sin(th)*Math.cos(ph),Math.cos(th),Math.sin(th)*Math.sin(ph)),m=new THREE.Mesh(HG,HM[k%3]);m.position.copy(n).multiplyScalar(HRR*out);m.quaternion.setFromUnitVectors(V(0,1,0),n);m.rotateY(k*1.9);m.scale.set(r*1.5,r*.8,r);hair.add(m)};
+for(let i=0;i<54;i++)clump(Math.acos(1-(i+.5)/54*1.156),i*2.39996,.052,1,i);
+for(let i=0;i<9;i++)clump(Math.PI*(.4+.08*(i%2)),-Math.PI/2-1.0+i*.25,.04,1.02,i+3);
+for(let i=0;i<5;i++)clump(Math.PI*.26,-Math.PI/2-.5+i*.25,.07,1.08,i+1);
 sph(.03,SK,0,-.02,-HR*.97,head,[1,1.2,1],.55);
+sph(.017,SK,0,.015,-HR*.985,head,[1,1.7,.8],.55);
+[-1,1].forEach(s=>{sph(.013,SK,s*.024,-.04,-HR*.97,head,[1,.9,.9],.55);sph(.0075,0x3a2018,s*.013,-.05,-HR*1.045,head,[1,.7,.6],.9)});
 [-1,1].forEach(s=>{
   sph(.036,0xf8f8f8,s*.088,.02,-HR*.91,head,[1,.8,.5],.2);
   sph(.021,0x2a1a10,s*.088,.02,-HR*.955,head,[1,1,.5],.2);
   sph(.01,0x000000,s*.088,.02,-HR*.985,head,[1,1,.5],.1);
   sph(.006,0xffffff,s*.095,.028,-HR*1.0,head,[1,1,.5],.1);
-  const eb=new THREE.Mesh(new THREE.BoxGeometry(.07,.013,.012),M(0x15110f,.9));eb.position.set(s*.09,.07,-HR*.93);eb.rotation.z=s*.12;head.add(eb);
+  const eb=new THREE.Mesh(new THREE.SphereGeometry(.036,14,10),M(0x0a0a0c,.9));eb.scale.set(1.2,.3,.42);eb.position.set(s*.09,.075,-HR*.9);eb.rotation.z=s*.12;head.add(eb);
+  sph(.04,SK,s*.088,.047,-HR*.918,head,[1.15,.42,.6],.55);
+  sph(.04,0x0d0a09,s*.088,.031,-HR*.925,head,[1.12,.09,.55],.6);
   sph(.04,0xff9aa8,s*.15,-.06,-HR*.86,head,[1,.6,.3],.8).material.transparent=true;
   sph(.045,SK,s*HR,-.01,0,head,null,.6);
   const cup=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.06,24),M(GOLD,.35,.5));cup.rotation.z=Math.PI/2;cup.position.set(s*(HR+.02),0,0);head.add(cup)});
-const sm=new THREE.Mesh(new THREE.TorusGeometry(.05,.009,8,18,Math.PI),B(0x7a3b2e));sm.rotation.z=Math.PI;sm.position.set(0,-.085,-HR*.97);head.add(sm);
-const band=new THREE.Mesh(new THREE.TorusGeometry(HR*1.15,.022,10,32,Math.PI),M(0x1b2238,.5));head.add(band);
+sph(.03,0xb8645c,0,-.09,-HR*.98,head,[1.5,.38,.5],.5);
+sph(.03,0xc4706a,0,-.108,-HR*.98,head,[1.3,.45,.55],.5);
+sph(.03,0x4a211c,0,-.0985,-HR*.99,head,[1.45,.07,.45],.9);
+[-1,1].forEach(s=>sph(.009,0x9a514a,s*.043,-.094,-HR*.955,head,[1,.7,.6],.6));
+const band=new THREE.Mesh(new THREE.TorusGeometry(HR*1.42,.022,10,32,Math.PI),M(0x1b2238,.5));band.scale.set(.77,1,1);head.add(band);
 [-1,1].forEach(sx=>{
   const th=limb(.09,SH);setL(th,V(sx*.14,.56,.66),V(sx*.14,.6,.14));
   sph(.09,SH,sx*.14,.6,.14,g,null,.85);
   const sh=limb(.06,SH);setL(sh,V(sx*.14,.6,.14),V(sx*.14,.12,.12));
   cyl(.066,.066,.05,NAVY,sx*.14,.34,.13);
   box(.17,.07,.3,0x15171d,sx*.14,.06,.2,g,.6);box(.175,.02,.305,0xffffff,sx*.14,.02,.2)});
-const ua=[limb(.058,SH),limb(.058,SH)],fa=[limb(.045,SK),limb(.045,SK)],sho=[V(-.32,1.07,.6),V(.32,1.07,.6)],elb=[V(-.36,.8,.52),V(.36,.8,.52)];
+
+/* arms + activities: coding -> sip coffee -> eat cake -> play with the toy figure */
+const ua=[limb(.058,SH),limb(.058,SH)],fa=[limb(.045,SK),limb(.045,SK)];
 const hs=[sph(.04,SK,0,0,0),sph(.04,SK,0,0,0)];
-let hand=[V(-.14,.84,-.05),V(.14,.84,-.05)];
-function arms(t){hand[0].set(-.14+Math.sin(t*9)*.015,.835+Math.max(0,Math.sin(t*13))*.012,-.05+Math.sin(t*5)*.02);hand[1].set(.14+Math.sin(t*7)*.015,.835+Math.max(0,Math.sin(t*11+1))*.012,-.05+Math.cos(t*6)*.02);
-for(let i=0;i<2;i++){setL(ua[i],sho[i],elb[i]);setL(fa[i],elb[i],hand[i]);hs[i].position.copy(hand[i])}}
+const shB=[V(-.32,1.07,.6),V(.32,1.07,.6)],PIV=V(0,.5,.62),toyRest=toy.position.clone();
+const ss=x=>{x=Math.min(1,Math.max(0,x));return x*x*(3-2*x)};
+const path=(u,k)=>{for(let i=0;i<k.length-1;i++)if(u<=k[i+1][0])return k[i][1].clone().lerp(k[i+1][1],ss((u-k[i][0])/(k[i+1][0]-k[i][0])));return k[k.length-1][1].clone()};
+const win=(p,a,b)=>p>=a&&p<=b?(p-a)/(b-a):-1;
+const env=u=>u<0?0:ss(u/.15)*ss((1-u)/.15);
+/* one cycle = 32s: code -> coffee (4-10s) -> code -> cake (13-20s) -> code -> play with toy (23-31s) */
+const CYC=32;let hy=0,hx=0;
+function arms(t){
+  const p=t%CYC,uc=win(p,4,10),uk=win(p,13,20),ut=win(p,23,31);
+  const lean=.1*env(uc)+.2*env(uk)+.4*env(ut);
+  upper.rotation.x=-lean;upper.position.copy(PIV).sub(PIV.clone().applyEuler(upper.rotation));upper.updateMatrix();
+  const sh=shB.map(v=>v.clone().applyMatrix4(upper.matrix)),mouth=V(0,1.315,.297).applyMatrix4(upper.matrix);
+  const tr=V(.14+Math.sin(t*7)*.015,.835+Math.max(0,Math.sin(t*11+1))*.012,-.05+Math.cos(t*6)*.02),
+        tl=V(-.14+Math.sin(t*9)*.015,.835+Math.max(0,Math.sin(t*13))*.012,-.05+Math.sin(t*5)*.02);
+  let hR=tr,hL=tl,yaw=0,pit=0,chew=0;
+  mug.position.set(.88,.83,-.2);mug.rotation.set(0,0,0);toy.position.copy(toyRest);toy.rotation.set(0,0,0);bite.visible=false;
+  if(uc>=0){ /* right hand: sip the iced latte through the straw */
+    const hm=V(.935,.85,-.2),hmo=mouth.clone().add(V(.033,-.145,-.02)),sip=Math.max(0,Math.sin((uc-.46)/.24*Math.PI));
+    hR=path(uc,[[0,tr],[.18,hm],[.26,hm],[.46,hmo],[.7,hmo],[.86,hm],[.92,hm],[1,tr]]);
+    if(uc>.26&&uc<.86){mug.position.copy(hR).sub(V(.055,.02,0));mug.rotation.x=-.08*sip}
+    yaw=uc<.3?-.45:-.05;pit=-.04*sip;
+  }
+  if(uk>=0){ /* left hand: take a piece of cake and eat it */
+    const hk=V(-.92,.95,-.26),hk2=V(-.92,.9,-.26),hmo=mouth.clone().add(V(-.03,-.02,-.05));
+    hL=path(uk,[[0,tl],[.18,hk],[.28,hk2],[.38,hk],[.56,hmo],[.68,hmo],[.84,tl],[1,tl]]);
+    if(uk>.3&&uk<.62){bite.visible=true;bite.position.copy(hL).add(V(0,.02,-.03))}
+    yaw=uk<.35?.55:0;pit=uk<.35?-.2:0;chew=uk>.62&&uk<.9?1:0;
+  }
+  if(ut>=0){ /* right hand: play with the red toy figure */
+    const hg=V(.72,.87,-.66),A=V(.4,1.1,-.15),B2=V(.15,1.22,-.2),Cc=V(.55,1.18,-.08);
+    hR=path(ut,[[0,tr],[.17,hg],[.25,hg],[.38,A],[.5,B2],[.62,Cc],[.74,A],[.86,hg],[.92,hg],[1,tr]]);
+    if(ut>.25&&ut<.86){const f=ss((ut-.25)/.15)*ss((.86-ut)/.12);toy.position.copy(hR).sub(V(0,.09,0));toy.rotation.set(-.7*f,Math.sin(t*3)*.6*f,Math.sin(t*6)*.35*f)}
+    yaw=ut<.3?-.5:-.15;
+  }
+  hy+=(yaw-hy)*.07;hx+=(pit-hx)*.07;
+  head.rotation.y=hy+Math.sin(t*.7)*.06;
+  head.rotation.x=hx+Math.sin(t*1.3)*.03+chew*Math.sin(t*18)*.035;
+  const H=[hL,hR];
+  for(let i=0;i<2;i++){const s=sh[i],h=H[i],e=s.clone().add(h).multiplyScalar(.5);e.x+=i?.09:-.09;e.y-=.14;e.z+=.1;setL(ua[i],s,e);setL(fa[i],e,h);hs[i].position.copy(h)}
+}
 arms(0);
-g.traverse(o=>{if(o.isMesh&&!(o.material&&o.material.isMeshBasicMaterial)){o.castShadow=true;o.receiveShadow=true}});
+g.traverse(o=>{if(o.isMesh&&!(o.material&&(o.material.isMeshBasicMaterial||o.material.transparent))){o.castShadow=true;o.receiveShadow=true}});
 
 /* interaction: mouse move / touch drag rotates the model */
 let ty=-.5,cy=-.5,tx=0,lx=null;
@@ -508,7 +571,7 @@ function ui(bell){
 const clk=new THREE.Clock();
 function a(){requestAnimationFrame(a);const t=clk.getElapsedTime();const bell=place();
 cy+=(ty-cy)*.06;g.rotation.y=cy;g.rotation.x+=(tx-g.rotation.x)*.06;
-if(!reduce){arms(t);flame.scale.y=1.5+Math.sin(t*15)*.3;head.rotation.x=Math.sin(t*1.3)*.03;head.rotation.y=Math.sin(t*.7)*.06}
+if(!reduce){arms(t);flame.scale.y=1.5+Math.sin(t*15)*.3}
 R.render(S,C);ui(bell)}a();
 }
 </script>
