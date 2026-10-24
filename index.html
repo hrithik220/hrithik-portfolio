@@ -163,6 +163,15 @@ h1 span{display:block;background:linear-gradient(90deg,var(--ac),#c4b5fd);-webki
 .ci{display:block;padding:1rem 1.3rem;border:1px solid var(--line);border-radius:14px;background:var(--s1);margin-bottom:.7rem;font-weight:500;font-size:.9rem;transition:all .25s;word-break:break-word}.ci:hover{border-color:var(--ac);transform:translateX(4px)}
 .row{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem;font-weight:500;font-size:.9rem}
 .hr{height:1px;background:var(--line);margin:1.4rem 0}
+.cf{margin-top:2rem}
+.cf label{display:block;font-size:.78rem;color:var(--faint);margin-bottom:1rem}
+.cf input:not([type=checkbox]),.cf textarea{display:block;width:100%;margin-top:.4rem;padding:.85rem 1rem;border-radius:12px;border:1px solid var(--line);background:var(--s2);color:var(--tx);font:inherit;font-size:.9rem;transition:border-color .2s}
+.cf textarea{resize:vertical;min-height:120px}
+.cf input:focus,.cf textarea:focus{outline:none;border-color:var(--ac)}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.cf-row{grid-template-columns:1fr}}
+.cf .btn{border:0;cursor:pointer}.cf .btn:disabled{opacity:.6;cursor:wait}
+.cf-msg{margin-top:1rem;font-size:.85rem;min-height:1.2em;color:var(--dim)}.cf-msg.ok{color:var(--ok)}.cf-msg.err{color:#ff8a8a}
 footer{border-top:1px solid var(--line);text-align:center;padding:2rem;font-size:.75rem;color:var(--faint)}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--e),transform .8s var(--e)}.rv.v{opacity:1;transform:none}
 
@@ -294,7 +303,16 @@ footer{border-top:1px solid var(--line);text-align:center;padding:2rem;font-size
 <a href="https://www.instagram.com/hrithiksilawat" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" style="--ic:#f56a8e;--bgh:linear-gradient(45deg,#f09433,#dc2743 55%,#bc1888);--bgc:#dc2743"><svg><use href="#ic-ig"/></svg></a>
 <a href="https://wa.me/8801819438089" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp" style="--ic:#25d366;--bgh:#25d366;--bgc:#25d366"><svg><use href="#ic-wa"/></svg></a>
 </div></div>
-<div class="box rv"><div class="kick">CURRENT STATUS</div><div class="row"><span class="dot"></span>Open for collaboration</div><div class="row"><span class="dot"></span>Based in Dhaka, Bangladesh</div><div class="hr"></div><div class="kick">RESPONSE TIME</div><div class="tt" style="margin:0">&lt; 24 hours</div></div></div></section>
+<div class="box rv"><div class="kick">CURRENT STATUS</div><div class="row"><span class="dot"></span>Open for collaboration</div><div class="row"><span class="dot"></span>Based in Dhaka, Bangladesh</div><div class="hr"></div><div class="kick">RESPONSE TIME</div><div class="tt" style="margin:0">&lt; 24 hours</div></div></div>
+<form class="cf box rv" id="cf">
+<div class="kick">SEND ME A MESSAGE</div>
+<div class="tt" style="font-size:1.15rem">Have a project, an internship, or just want to say hi?</div>
+<div class="cf-row"><label>Your name<input name="name" type="text" required maxlength="80" autocomplete="name" placeholder="Your name"></label><label>Your email<input name="email" type="email" required maxlength="120" autocomplete="email" placeholder="you@example.com"></label></div>
+<label>Message<textarea name="message" required rows="5" maxlength="2000" placeholder="Write your message..."></textarea></label>
+<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
+<button class="btn" type="submit" id="cfBtn">Send Message</button>
+<p class="cf-msg" id="cfMsg" role="status" aria-live="polite"></p>
+</form></section>
 </main>
 <footer>© 2025 Hrithik.</footer>
 
@@ -327,6 +345,21 @@ document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',e=>{if(
 /* ---- 3D tilt on cards + portrait (mouse only) ---- */
 function tilt(el,max){el.addEventListener('mousemove',e=>{if(reduce)return;const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform=`rotateY(${x*max}deg) rotateX(${-y*max}deg)`});el.addEventListener('mouseleave',()=>el.style.transform='')}
 document.querySelectorAll('.card').forEach(c=>tilt(c,10));tilt($('#tilt'),14);
+
+/* ---- contact form -> your inbox (Web3Forms) ---- */
+const WEB3FORMS_KEY='0e7bee42-b7f5-4c50-bed8-a72d295caec8'; /* messages arrive in the BRACU inbox this key was created with */
+(()=>{const f=$('#cf');if(!f)return;const btn=$('#cfBtn'),msg=$('#cfMsg');
+const say=(t,c)=>{msg.textContent=t;msg.className='cf-msg '+(c||'')};
+f.addEventListener('submit',async e=>{e.preventDefault();
+ if(WEB3FORMS_KEY.startsWith('YOUR_')){say('The contact form is not set up yet. Please email me directly.','err');return}
+ btn.disabled=true;say('Sending…');
+ try{const d=Object.fromEntries(new FormData(f));
+  d.access_key=WEB3FORMS_KEY;d.subject='New message from your portfolio website';d.from_name='Portfolio Contact Form';
+  const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)});
+  const j=await r.json();
+  if(j.success){say('Thanks! Your message was sent. I’ll reply within 24 hours.','ok');f.reset()}else throw new Error(j.message||'failed');
+ }catch(err){say('Sorry, something went wrong. Please email me at hrithiksilawat@gmail.com.','err')}
+ btn.disabled=false})})();
 
 /* ---- Three.js: developer at a desk, rendered inside #scene ---- */
 if(window.THREE){
