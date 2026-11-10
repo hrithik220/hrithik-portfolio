@@ -6,8 +6,12 @@
 <meta name="theme-color" content="#070b14">
 <title>Hrithik — Software Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preconnect" href="https://i.imgur.com" crossorigin>
+<link rel="preload" as="image" href="https://i.imgur.com/Ywo1SIi.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{--bg:#070b14;--s1:#0e1424;--s2:#151c30;--line:rgba(160,185,255,.14);--tx:#eef2ff;--dim:#a3aecb;--faint:#6b7694;--ac:#7c9cff;--am:#ffb648;--ok:#34d399;--d:'Sora',system-ui,sans-serif;--b:'Inter',system-ui,sans-serif;--e:cubic-bezier(.22,1,.36,1)}
@@ -182,6 +186,12 @@ footer{border-top:1px solid var(--line);text-align:center;padding:2rem;font-size
 #bubble:after{content:'';position:absolute;left:calc(50% + var(--tx,0px));bottom:-6px;width:10px;height:10px;background:rgb(21,28,48);border-right:1px solid rgba(124,156,255,.5);border-bottom:1px solid rgba(124,156,255,.5);transform:translateX(-50%) rotate(45deg)}
 #bubble.show{opacity:1;visibility:visible}
 
+#skills,#academic,#thesis,#contact{content-visibility:auto;contain-intrinsic-size:auto 900px}
+/* CV download */
+.btn.cv{display:inline-flex;align-items:center;gap:.5rem}
+.btn.cv svg{width:16px;height:16px;stroke:currentColor;fill:none}
+.ci.cvl{display:flex;align-items:center;gap:.7rem;border-color:rgba(124,156,255,.4);color:var(--ac)}
+.ci.cvl svg{width:18px;height:18px;stroke:currentColor;fill:none;flex-shrink:0}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
@@ -194,6 +204,7 @@ footer{border-top:1px solid var(--line);text-align:center;padding:2rem;font-size
 <symbol id="ic-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
 <symbol id="ic-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="17.6" cy="6.4" r="1.25" fill="currentColor"/></symbol>
 <symbol id="ic-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7.5 8.5 6 8.5-6"/></g></symbol>
+<symbol id="ic-dl" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 20h16"/></g></symbol>
 <symbol id="ic-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></g></symbol>
 <symbol id="ic-award" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14.5-1.5 7 5-3 5 3-1.5-7"/></g></symbol>
 <symbol id="ic-cur" viewBox="0 0 24 24"><path d="M5 2.5 20 11l-7 2.2L10.5 21z"/></symbol>
@@ -202,26 +213,26 @@ footer{border-top:1px solid var(--line);text-align:center;padding:2rem;font-size
 <canvas id="bg"></canvas>
 <nav>
 <div class="logo">Hrithik<i>.</i></div>
-<ul><li><a href="#projects">Projects</a></li><li><a href="#certificates">Certificates</a></li><li><a href="#education">Education</a></li><li><a href="#skills">Skills</a></li><li><a href="#academic">Academic</a></li><li><a href="#thesis">Thesis</a></li><li><a href="#contact">Contact</a></li></ul>
+<ul><li><a href="#projects">Projects</a></li><li><a href="#certificates">Certificates</a></li><li><a href="#education">Education</a></li><li><a href="#skills">Skills</a></li><li><a href="#academic">Academic</a></li><li><a href="#thesis">Thesis</a></li><li><a href="#contact">Contact</a></li><li><a href="Hrithik-Dev-CV.pdf" download="Hrithik-Dev-CV.pdf" target="_blank" rel="noopener">CV</a></li></ul>
 <div class="nr">
 <a class="btn" href="mailto:hrithiksilawat@gmail.com" style="padding:.5rem 1.1rem;font-size:.8rem">Get in Touch</a>
 <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menuPanel"><span></span><span></span><span></span></button>
 </div>
 <div class="menu-panel" id="menuPanel" role="menu">
-<a href="#home" role="menuitem">Home</a><a href="#projects" role="menuitem">Projects</a><a href="#certificates" role="menuitem">Certificates</a><a href="#education" role="menuitem">Education</a><a href="#skills" role="menuitem">Skills</a><a href="#academic" role="menuitem">Academic</a><a href="#thesis" role="menuitem">Thesis</a><a href="#contact" role="menuitem">Contact</a>
+<a href="#home" role="menuitem">Home</a><a href="#projects" role="menuitem">Projects</a><a href="#certificates" role="menuitem">Certificates</a><a href="#education" role="menuitem">Education</a><a href="#skills" role="menuitem">Skills</a><a href="#academic" role="menuitem">Academic</a><a href="#thesis" role="menuitem">Thesis</a><a href="#contact" role="menuitem">Contact</a><a href="Hrithik-Dev-CV.pdf" download="Hrithik-Dev-CV.pdf" target="_blank" rel="noopener" role="menuitem">Download CV</a>
 </div>
 </nav>
 <main>
 <div id="home"><div class="hero">
 
-<div class="photo"><div class="pframe" id="tilt"><img src="https://i.imgur.com/Ywo1SIi.jpg" alt="Hrithik"><div class="pbadge"><b>10+</b><small>Live projects</small></div></div></div>
+<div class="photo"><div class="pframe" id="tilt"><img src="https://i.imgur.com/Ywo1SIi.jpg" alt="Hrithik" width="260" height="330" fetchpriority="high" decoding="async"><div class="pbadge"><b>10+</b><small>Live projects</small></div></div></div>
 
 <div class="txt">
 <div class="tag"><span class="dot"></span>Open to opportunities · BRAC University</div>
 <h1>Hrithik<span>Software Engineer.</span></h1>
 <div class="role">Full-Stack Developer <b>&amp;</b> Problem Solver</div>
 <p class="bio">I'm a <b>Computer Science &amp; Engineering</b> student at BRAC University who builds clean, purposeful software — from production web platforms to embedded systems and deep learning research. I care about the details that separate a working product from a well-made one.</p>
-<a href="#projects" class="btn">View Work</a><a href="mailto:hrithiksilawat@gmail.com" class="btn g">Get in Touch</a>
+<a href="#projects" class="btn">View Work</a><a href="mailto:hrithiksilawat@gmail.com" class="btn g">Get in Touch</a><a href="Hrithik-Dev-CV.pdf" download="Hrithik-Dev-CV.pdf" target="_blank" rel="noopener" class="btn g cv"><svg><use href="#ic-dl"/></svg>Download CV</a>
 <div class="links">
 <a href="https://github.com/hrithik220" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub" style="--ic:#eef2ff;--bgh:#2b3140;--bgc:#6b7694"><svg><use href="#ic-gh"/></svg></a>
 <a href="https://www.linkedin.com/in/hrithik-silawat-076a25232" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn" style="--ic:#4d9bf0;--bgh:#0a66c2;--bgc:#0a66c2"><svg><use href="#ic-in"/></svg></a>
@@ -294,7 +305,7 @@ footer{border-top:1px solid var(--line);text-align:center;padding:2rem;font-size
 <div class="st"><small style="margin:0 0 .7rem">TOOLS &amp; TECHNIQUES</small><div class="tags"><span>TensorFlow / Keras</span><span>EfficientNetB0</span><span>BiLSTM / BiGRU</span><span>Self-Attention</span><span>Transfer Learning</span><span>Grad-CAM</span></div></div></div></div></section>
 
 <section class="wrap" id="contact"><h2>Contact</h2><p class="sub">Open to internships, collaborations, or a conversation about tech. I usually reply within 24 hours.</p>
-<div class="ct"><div><a class="ci" href="mailto:hrithiksilawat@gmail.com">hrithiksilawat@gmail.com</a><a class="ci" href="tel:+8801819438089">+880 1819 438089</a>
+<div class="ct"><div><a class="ci cvl" href="Hrithik-Dev-CV.pdf" download="Hrithik-Dev-CV.pdf" target="_blank" rel="noopener"><svg><use href="#ic-dl"/></svg>Download my CV (PDF)</a><a class="ci" href="mailto:hrithiksilawat@gmail.com">hrithiksilawat@gmail.com</a><a class="ci" href="tel:+8801819438089">+880 1819 438089</a>
 <div class="kick" style="margin:1.4rem 0 0">FIND ME ON</div>
 <div class="soc">
 <a href="https://github.com/hrithik220" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub" style="--ic:#eef2ff;--bgh:#2b3140;--bgc:#6b7694"><svg><use href="#ic-gh"/></svg></a>
@@ -318,7 +329,6 @@ footer{border-top:1px solid var(--line);text-align:center;padding:2rem;font-size
 
 <div id="bubble" role="status" aria-live="polite"><b>I'm Hrithik</b>Software Engineer — Computer Science &amp; Engineering, BRAC University.</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const $=s=>document.querySelector(s),reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
@@ -362,13 +372,13 @@ f.addEventListener('submit',async e=>{e.preventDefault();
  btn.disabled=false})})();
 
 /* ---- Three.js: developer at a desk, rendered inside #scene ---- */
-if(window.THREE){
-const sc=$('#scene'),cv=$('#bg'),R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true}),S=new THREE.Scene(),C=new THREE.PerspectiveCamera(42,1,.1,100);
+function init3D(){
+const sc=$('#scene'),cv=$('#bg'),R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:!matchMedia('(pointer:coarse)').matches,powerPreference:'high-performance'}),S=new THREE.Scene(),C=new THREE.PerspectiveCamera(42,1,.1,100);
 R.setPixelRatio(Math.min(devicePixelRatio,matchMedia('(pointer:coarse)').matches?1.5:2));R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.1;
 R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
 C.position.set(0,1.7,5.2);C.lookAt(0,.85,0);
 S.add(new THREE.HemisphereLight(0xcfd8ff,0x1a2040,.8));
-const key=new THREE.DirectionalLight(0xffffff,1.0);key.position.set(3,5,4);key.castShadow=true;key.shadow.mapSize.set(1024,1024);
+const key=new THREE.DirectionalLight(0xffffff,1.0);key.position.set(3,5,4);key.castShadow=true;key.shadow.mapSize.set(...(matchMedia('(pointer:coarse)').matches?[512,512]:[1024,1024]));
 const sCam=key.shadow.camera;sCam.left=-3;sCam.right=3;sCam.top=3;sCam.bottom=-3;sCam.near=1;sCam.far=14;key.shadow.bias=-.0008;S.add(key);
 const rim=new THREE.PointLight(0x7c9cff,1.2,12);rim.position.set(-3,2,-2);S.add(rim);
 const glow=new THREE.PointLight(0x9db4ff,.9,3.5);glow.position.set(0,1.1,-.1);S.add(glow);
@@ -602,11 +612,15 @@ function ui(bell){
   bub.classList.toggle('show',scrollY>30&&bell>.3);
 }
 const clk=new THREE.Clock();
-function a(){requestAnimationFrame(a);const t=clk.getElapsedTime();const bell=place();
+function a(){requestAnimationFrame(a);if(document.hidden)return;const t=clk.getElapsedTime();const bell=place();
 cy+=(ty-cy)*.06;g.rotation.y=cy;g.rotation.x+=(tx-g.rotation.x)*.06;
 if(!reduce){arms(t);flame.scale.y=1.5+Math.sin(t*15)*.3}
 R.render(S,C);ui(bell)}a();
 }
+/* load the 3D library only after the page is fully usable */
+function loadThree(){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.async=true;s.onload=()=>{try{init3D()}catch(e){}};document.head.appendChild(s)}
+const start3D=()=>('requestIdleCallback' in window)?requestIdleCallback(loadThree,{timeout:2500}):setTimeout(loadThree,600);
+if(document.readyState==='complete')start3D();else addEventListener('load',start3D);
 </script>
 </body>
 </html>
